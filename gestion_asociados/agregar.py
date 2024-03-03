@@ -44,6 +44,11 @@ def main():
     ib_ref_personales.pack(pady=100, padx=10)
     ib_ref_personales.place(x=210, y=250)
 
+    cb_busqueda = customtkinter.CTkComboBox(master=frame, font=("Times New Roman", 20),
+                                            values=['Recibo De Luz', 'Telefono', 'Estados de cuenta'], width=200)
+    cb_busqueda.pack(pady=400, padx=400, )
+    cb_busqueda.place(x=150, y=200)
+
     def seleccionar_imagen():
         get_image = filedialog.askopenfilenames(title="SELECT IMAGE",
                                                 filetypes=(("png", "*.png"), ("jpg", "*.jpg"), ("Allfile", "*.*")))
@@ -78,7 +83,7 @@ def main():
     button_select_img = customtkinter.CTkButton(master=frame, text="Seleccionar", fg_color=color,
                                                 command=seleccionar_imagen)
     button_select_img.pack(pady=100, padx=10)
-    button_select_img.place(x=260, y=207)
+    button_select_img.place(x=630, y=207)
 
     # confirmación
     button_confirm_1 = customtkinter.CTkButton(master=frame, text="Confirmar", fg_color=color, width=180, height=45)
@@ -135,7 +140,7 @@ def labels_parte1(frame):
 
     lb_select_img = customtkinter.CTkLabel(master=frame, text='Seleccionar Imagen', font=("Times New Roman", 30))
     lb_select_img.pack(pady=400, padx=400)
-    lb_select_img.place(x=10, y=200)
+    lb_select_img.place(x=370, y=200)
 
     lb_nit = customtkinter.CTkLabel(master=frame, text='NIT', font=("Times New Roman", 30))
     lb_nit.pack(pady=400, padx=400)
@@ -144,3 +149,7 @@ def labels_parte1(frame):
     lb_ref_personales = customtkinter.CTkLabel(master=frame, text='Ref. Personales', font=("Times New Roman", 30))
     lb_ref_personales.pack(pady=400, padx=400)
     lb_ref_personales.place(x=10, y=245)
+
+    lb_tipo = customtkinter.CTkLabel(master=frame, text='Tipo Doc.', font=("Times New Roman", 30))
+    lb_tipo.pack(pady=400, padx=400)
+    lb_tipo.place(x=10, y=200)
