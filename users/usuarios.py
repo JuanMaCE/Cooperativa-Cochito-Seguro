@@ -17,7 +17,7 @@ def cargar_datos():
     # root
     ventana = customtkinter.CTkToplevel()
     ventana.grab_set()
-    ventana.title("Edición de Asociados")
+    ventana.title("Usuarios Existentes")
     ventana.geometry("1000x300")
 
     # buttons
@@ -32,8 +32,7 @@ def frame1(ventana):
 
 
 def labels_parte1(frame, ):
-    lb_inbreso = customtkinter.CTkLabel(master=frame, text='Menú Gestión Asociados',
+    lb_inbreso = customtkinter.CTkLabel(master=frame, text='Usuarios Registrados',
                                         font=("Times New Roman", 50, "bold"))
     lb_inbreso.pack(pady=400, padx=400, )
     lb_inbreso.place(x=10, y=0)
-

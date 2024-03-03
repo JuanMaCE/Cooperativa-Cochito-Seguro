@@ -1,11 +1,16 @@
 import customtkinter
 from gestion_asociados import menu_gestion_asociados
+from users import user_window
 
 app = customtkinter.CTk()
 
 
 def open_gestion():
     menu_gestion_asociados.main()
+
+
+def open_users():
+    user_window.main()
 
 
 def main_window():
@@ -36,7 +41,7 @@ def buttons(frame):
     bt_prestamos_bancarios.place(x=50, y=150)
 
     bt_usuarios = customtkinter.CTkButton(master=frame, text='Usuarios', height=100, width=210,
-                                          font=("Arial", 20), fg_color="#3E4446")
+                                          font=("Arial", 20), fg_color="#3E4446", command=lambda: open_users())
 
     bt_usuarios.pack(pady=10, padx=10)
     bt_usuarios.place(x=50, y=310)

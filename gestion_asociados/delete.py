@@ -17,7 +17,7 @@ def cargar_datos():
     # root
     ventana = customtkinter.CTkToplevel()
     ventana.grab_set()
-    ventana.title("Eliminacion de usuarios")
+    ventana.title("Eliminacion de Asociados")
     ventana.geometry("1000x300")
 
     # buttons

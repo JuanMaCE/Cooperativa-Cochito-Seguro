@@ -17,7 +17,7 @@ def cargar_datos():
     # root
     ventana = customtkinter.CTkToplevel()
     ventana.grab_set()
-    ventana.title("Registro de nuevos usuarios")
+    ventana.title("Registro de Nuevos Asociados")
     ventana.geometry("1000x300")
 
     # buttons
