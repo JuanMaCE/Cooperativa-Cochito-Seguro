@@ -1,5 +1,5 @@
 import customtkinter
-from users import user_delete, user_edit, usuarios
+from users import user_delete, user_edit, usuarios, user_registro
 
 
 color = "#3E4446"
@@ -15,8 +15,12 @@ def main():
     return
 
 
-def open_registro():
+def open_ver():
     usuarios.main()
+
+
+def open_registro():
+    user_registro.main()
 
 
 def open_edit():
@@ -53,17 +57,22 @@ def labels_parte1(frame, ):
     lb_inbreso.pack(pady=400, padx=400, )
     lb_inbreso.place(x=10, y=0)
 
-    button_usuarios = customtkinter.CTkButton(master=frame, text="Registrar", fg_color=color, height=100, width=210,
-                                             command=open_registro)
+    button_registro = customtkinter.CTkButton(master=frame, text="Registrar", fg_color=color, height=100, width=210,
+                                              command=open_registro)
+    button_registro.pack(pady=100, padx=10)
+    button_registro.place(x=10, y=100)
+
+    button_usuarios = customtkinter.CTkButton(master=frame, text="Ver Usuarios", fg_color=color, height=100, width=210,
+                                             command=open_ver)
     button_usuarios.pack(pady=100, padx=10)
-    button_usuarios.place(x=10, y=100)
+    button_usuarios.place(x=225, y=100)
 
     button_editar = customtkinter.CTkButton(master=frame, text="Actualizar", fg_color=color, height=100, width=210,
                                             command=open_edit)
     button_editar.pack(pady=100, padx=10)
-    button_editar.place(x=340, y=100)
+    button_editar.place(x=440, y=100)
 
     button_deshabilitar = customtkinter.CTkButton(master=frame, text="Eliminar", fg_color=color, height=100, width=210,
                                               command=open_delete)
     button_deshabilitar.pack(pady=100, padx=10)
-    button_deshabilitar.place(x=650, y=100)
+    button_deshabilitar.place(x=655, y=100)

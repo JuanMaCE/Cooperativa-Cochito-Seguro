@@ -32,18 +32,7 @@ def frame1(ventana):
 
 
 def labels_parte1(frame, ):
-    lb_inbreso = customtkinter.CTkLabel(master=frame, text='Actualizar Datos',
+    lb_inbreso = customtkinter.CTkLabel(master=frame, text='Registrar Usuario',
                                         font=("Times New Roman", 50, "bold"))
     lb_inbreso.pack(pady=400, padx=400, )
     lb_inbreso.place(x=10, y=0)
-
-    bt_data = customtkinter.CTkButton(master=frame, text='Datos', height=100, width=210,
-                                          font=("Arial", 20), fg_color="#3E4446")
-    bt_data.pack(pady=100, padx=10)
-    bt_data.place(x=10, y=100)
-
-    bt_password = customtkinter.CTkButton(master=frame, text='Contraseña', height=100, width=210,
-                                                    font=("Arial", 20), fg_color="#3E4446")
-
-    bt_password.pack(pady=100, padx=10)
-    bt_password.place(x=340, y=100)
