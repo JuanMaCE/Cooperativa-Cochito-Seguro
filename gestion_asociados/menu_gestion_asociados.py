@@ -16,7 +16,9 @@ def main():
 
 
 def open_registro():
-    agregar.main()
+    a = agregar.main()
+    for i in range(len(a)):
+        print(i)
 
 
 def open_edit():

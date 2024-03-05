@@ -5,6 +5,8 @@ import shutil
 import os
 global texto_imagen
 
+listas = [1, 2, 3, 4, 5, 6]
+
 
 def main():
     ventana = cargar_datos()
@@ -91,7 +93,7 @@ def main():
     button_confirm_1.place(x=630, y=240)
     ventana.mainloop()
 
-    return
+    return listas
 
 
 def cargar_datos():

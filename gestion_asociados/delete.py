@@ -40,8 +40,7 @@ def frame(ventana):
 
 
 def labels_parte1(frame_u):
-
-    lb_inbreso = customtkinter.CTkLabel(master=frame_u, text='Edicion asociados',
+    lb_inbreso = customtkinter.CTkLabel(master=frame_u, text='Eliminación asociados',
                                         font=("Times New Roman", 50, "bold"))
     lb_inbreso.pack(pady=400, padx=400)
     lb_inbreso.place(x=10, y=0)
