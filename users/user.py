@@ -6,3 +6,7 @@ class User:
         self.__password = password
         self.puesto = puesto
         self.status = False
+
+    @property
+    def password(self):
+        return self.__password

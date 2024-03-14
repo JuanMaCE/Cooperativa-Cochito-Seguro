@@ -1,8 +1,18 @@
 import customtkinter
 from gestion_asociados import menu_gestion_asociados
 from users import user_login
+from users.user import User
+from data_estructure.list.list import List
 
+user_pred = List[User]()
 app = customtkinter.CTk()
+
+
+def usuarios_predeterminados():
+    user_pred.append(User(12345, 'Juan', 'juanmc228@gmail.com', 'Admin123', 'Administrador'))
+    user_pred.append(User(54321, 'Roger', 'rogcl228@gmail.com', 'Admin123', 'Administrador'))
+    user_pred.append(User(56789, 'Vyn', 'vynla228@gmail.com', 'Admin123', 'Administrador'))
+    user_pred.append(User(98765, 'Chat', 'chatman228@gmail.com', 'Admin123', 'Administrador'))
 
 
 def open_gestion():
@@ -10,7 +20,8 @@ def open_gestion():
 
 
 def open_users():
-    user_login.Login()
+    usuarios_predeterminados()
+    user_login.Login(user_pred)
 
 
 def main_window():

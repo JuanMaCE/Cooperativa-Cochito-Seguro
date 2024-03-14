@@ -4,11 +4,12 @@ from users import user_window
 
 
 class Login:
-    def __init__(self):
+    def __init__(self, usuarios):
         self.ventana = self.cargar_datos()
         self.frame = self.frame1(self.ventana)
         self.input_password = customtkinter.CTkEntry(master=self.frame, show='*', width=600)
         self.labels_parte1(self.frame)
+        self.usuarios_pred = usuarios
         print(" ")
         self.ventana.mainloop()
 
@@ -71,12 +72,13 @@ class Login:
     def login(self):
         name = self.input_name.get()
         password = self.input_password.get()
-        if name == '':
-            if password == '+':
-                user_window.main()
+        for x in self.usuarios_pred:
+            if name == x.name:
+                if password == x.password:
+                    user_window.main()
+                else:
+                    CTkMessagebox(title='Advertencia', message='Contraseña Incorrecta')
             else:
-                CTkMessagebox(title='Advertencia', message='Contraseña Incorrecta')
-        else:
-            CTkMessagebox(title='Advertencia', message='No se Encuentra el Usuario')
+                CTkMessagebox(title='Advertencia', message='No se Encuentra el Usuario')
 
 
