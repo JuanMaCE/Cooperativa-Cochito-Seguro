@@ -1,4 +1,4 @@
-from node_list import Node
+from data_estructure.list.node_list import Node
 from typing import TypeVar, Generic
 
 T = TypeVar("T")

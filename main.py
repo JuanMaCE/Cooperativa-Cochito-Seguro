@@ -1,6 +1,6 @@
 import customtkinter
 from gestion_asociados import menu_gestion_asociados
-from users import user_window
+from users import user_login
 
 app = customtkinter.CTk()
 
@@ -10,7 +10,7 @@ def open_gestion():
 
 
 def open_users():
-    user_window.main()
+    user_login.Login()
 
 
 def main_window():

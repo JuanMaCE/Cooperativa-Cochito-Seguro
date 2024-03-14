@@ -20,7 +20,7 @@ def open_ver():
 
 
 def open_registro():
-    user_registro.main()
+    user_registro.UserRegistro()
 
 
 def open_edit():
