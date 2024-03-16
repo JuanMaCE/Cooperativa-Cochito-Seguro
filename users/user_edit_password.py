@@ -86,6 +86,7 @@ class EditPassword:
             if name == str(x.name):
                 if password == str(x.password):
                     x.password = new_password
+                    CTkMessagebox(title='', message='Realizado Correctamente')
                     break
                 else:
                     CTkMessagebox(title='Advertencia', message='Contraseña Incorrecta')

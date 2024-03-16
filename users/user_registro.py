@@ -1,4 +1,7 @@
 import random
+
+from CTkMessagebox import CTkMessagebox
+
 from data_estructure.list.list import List
 import customtkinter
 from users.user import User
@@ -96,3 +99,5 @@ class UserRegistro:
 
         user = User(codigo, name, email, password, puesto)
         self.usuarios_pred.append(user)
+
+        CTkMessagebox(title='', message='Realizado Correctamente')

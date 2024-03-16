@@ -1,4 +1,7 @@
 import random
+
+from CTkMessagebox import CTkMessagebox
+
 from data_estructure.list.list import List
 import customtkinter
 from users.user import User
@@ -98,3 +101,4 @@ class EditData:
                 x.email = email
                 x.password = password
                 x.puesto = puesto
+                CTkMessagebox(title='', message='Realizado Correctamente')

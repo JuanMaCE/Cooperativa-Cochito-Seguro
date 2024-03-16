@@ -76,6 +76,7 @@ class UserDelete:
             if name == str(x.name):
                 if password == str(x.password):
                     self.users.remove_at(cont)
+                    CTkMessagebox(title='', message='Realizado Correctamente')
                     break
                 else:
                     CTkMessagebox(title='Advertencia', message='Contraseña Incorrecta')
