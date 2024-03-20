@@ -37,3 +37,5 @@ class Asociado():
         self.nit = nit
         self.archivos_adjuntos = ListD()
         self.referencias_personales = referencias_personales
+
+        
