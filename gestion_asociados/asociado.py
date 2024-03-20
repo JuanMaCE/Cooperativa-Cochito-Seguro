@@ -38,4 +38,4 @@ class Asociado():
         self.archivos_adjuntos = ListD()
         self.referencias_personales = referencias_personales
 
-        
+
