@@ -49,22 +49,21 @@ class Prestamo:
 
 
 class HistorialPagos:
-    def __init__(self, cuotas, restante):
+    def __init__(self, cuotas, restante, pago):
         self.cuota = 0
         self.cuotas_restantes = cuotas
-        self.pago = 0
+        self.pago = pago
         self.acumulado = 0
         self.restante = restante
         self.fecha_pago = datetime.date
         self.historial = List()
 
-    def pagar(self, pago):
-        self.pago = pago
-        self.acumulado += pago
+    def pagar(self):
+        self.acumulado += self.pago
         self.cuotas_restantes -= 1
         self.cuota += 1
         self.fecha_pago = datetime.date
-        self.restante -= pago
+        self.restante -= self.pago
         result = f"Cuota {self.cuota}, "
         result += f"Pago Q.{self.pago}, "
         result += f"Fecha .{self.fecha_pago}, "
@@ -90,13 +89,13 @@ def solicitar():
         monto_aprobado = capacidad_de_pago
     garantia = input("GARANTIA, LAYOUT: ")
     archivo = input("ARCHIVOS, LAYOUT: ")
-    plan_pagos = "Numero de Pagos: ", cuotas, "Pago minimo en cuota: ", str(int(monto_aprobado // cuotas)+1)
-    historial_pagos = HistorialPagos(cuotas, monto_aprobado)
+    pago_cuota = (monto_aprobado // cuotas) + 1
+    plan_pagos = "Numero de Pagos: ", cuotas, "Pago minimo en cuota: ", str(pago_cuota)
+    historial_pagos = HistorialPagos(cuotas, monto_aprobado, pago_cuota)
     x = Prestamo(num_prestamo, 10001, "Generado",  monto_solicitado, cuotas, monto_aprobado, ingresos,
              garantia, archivo, plan_pagos, historial_pagos)
     print(x.transversal())
     prestamos.append(x)
-
 
 
 def generar_plan():
@@ -112,9 +111,6 @@ def generar_plan():
     print(pago_realizar, "pagos Boton en layout")
     print(interes_pagar, "interes a pagar text")
     print(monto_maximo - interes_pagar, "solicitar")
-
-
-solicitar()
 
 
 def aprobar():
@@ -135,4 +131,3 @@ def realizar_pago():
         if i.search_id() == codigo:
             print(i.historial())
 
-realizar_pago()
