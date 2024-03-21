@@ -34,7 +34,9 @@ def main():
     ib_asociado.place(x=330, y=265)
 
     button_solicitar = customtkinter.CTkButton(master=frame_1, text="Solicitar", fg_color=color, width=180, height=45
-                                             ,command=lambda: solicitar(ib_id.get(),ib_ingresos.get(),ib_cuotas.get(),ib_garantia.get(),ib_archivo.get()))
+                                             ,command=lambda: solicitar(ib_id.get(), ib_ingresos.get(), ib_cuotas.get(),
+                                                                        ib_garantia.get(), ib_archivo.get(),
+                                                                        ib_asociado.get()))
     button_solicitar.pack(pady=100, padx=10)
     button_solicitar.place(x=10, y=300)
     return

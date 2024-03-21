@@ -1,9 +1,12 @@
 import datetime
 import random
+
+from CTkMessagebox import CTkMessagebox
 from data_estructure.list.list import List
+from data_estructure.list_double.list_double import ListD
 from datetime import date
 
-prestamos = List()
+prestamos = ListD()
 
 
 class Prestamo:
@@ -99,24 +102,34 @@ class HistorialPagos:
             print(i)
 
 
-def solicitar(monto_solicitado,ingresos,cuotas,garantia,archivo):
-    ingresos = float(ingresos)
-    cuotas = int(cuotas)
-    monto_solicitado = float(monto_solicitado)
-    num_prestamo = random.randint(100, 999)
-    capacidad_de_pago = ingresos * 0.1 * cuotas
-    monto_solicitado_interes = ((monto_solicitado * ((cuotas//3) * 0.01)) + monto_solicitado)
-    if capacidad_de_pago >= monto_solicitado_interes:
-        monto_aprobado = monto_solicitado
-    else:
-        monto_aprobado = capacidad_de_pago
-    pago_cuota = (monto_aprobado // cuotas) + 1
-    plan_pagos = "Numero de Pagos: ", cuotas, "Pago minimo en cuota: ", str(pago_cuota)
-    historial_pagos = HistorialPagos(cuotas, monto_aprobado, pago_cuota)
-    x = Prestamo(num_prestamo, 10001, "Generado",  monto_solicitado, cuotas, monto_aprobado, ingresos,
-             garantia, archivo, plan_pagos, historial_pagos)
-    print(x.transversal())
-    prestamos.append(x)
+def solicitar(monto_solicitado,ingresos,cuotas,garantia, archivo, asociado):
+    #necesito lista de usuarios
+    #aqui
+    for x in lista_usuarios:
+        if asociado == str(x.codigo_asociado):
+            ingresos = float(ingresos)
+            cuotas = int(cuotas)
+            monto_solicitado = float(monto_solicitado)
+            num_prestamo = random.randint(100, 999)
+            capacidad_de_pago = ingresos * 0.1 * cuotas
+            monto_solicitado_interes = ((monto_solicitado * ((cuotas // 3) * 0.01)) + monto_solicitado)
+            if capacidad_de_pago >= monto_solicitado_interes:
+                monto_aprobado = monto_solicitado
+            else:
+                monto_aprobado = capacidad_de_pago
+            pago_cuota = (monto_aprobado // cuotas) + 1
+            plan_pagos = "Numero de Pagos: ", cuotas, "Pago minimo en cuota: ", str(pago_cuota)
+            historial_pagos = HistorialPagos(cuotas, monto_aprobado, pago_cuota)
+            x = Prestamo(num_prestamo, asociado, "Generado", monto_solicitado, cuotas, monto_aprobado, ingresos,
+                         garantia, archivo, plan_pagos, historial_pagos)
+            print(x.transversal())
+            prestamos.append(x)
+            break
+        else:
+            CTkMessagebox(title='Advertencia', message='Contraseña Incorrecta')
+
+
+
 
 
 def generar_plan(ingresos,tiempo):
@@ -139,11 +152,13 @@ def aprobar(codigo):
         if i.search_id() == int(codigo):
             i.change_status("Aprobado")
 
+
 def visualizar():
     lista = List()
     for i in prestamos:
         lista.append(i)
     return lista
+
 
 def realizar_pago(codigo):
     for i in prestamos:
