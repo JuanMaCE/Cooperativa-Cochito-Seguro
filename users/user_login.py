@@ -39,14 +39,14 @@ class Login:
         lb_inbreso.pack(pady=400, padx=400, )
         lb_inbreso.place(x=10, y=0)
 
-        lb_name = customtkinter.CTkLabel(master=frame, text='Nombre:',
+        lb_email = customtkinter.CTkLabel(master=frame, text='Email:',
                                          font=("Times New Roman", 15, "bold"))
-        lb_name.pack(pady=400, padx=400, )
-        lb_name.place(x=10, y=60)
+        lb_email.pack(pady=400, padx=400, )
+        lb_email.place(x=10, y=60)
 
-        self.input_name = customtkinter.CTkEntry(master=frame, placeholder_text="Nombre Completo", width=600)
-        self.input_name.pack(padx=40, pady=40)
-        self.input_name.place(x=80, y=60)
+        self.input_email = customtkinter.CTkEntry(master=frame, placeholder_text="Email", width=600)
+        self.input_email.pack(padx=40, pady=40)
+        self.input_email.place(x=80, y=60)
 
         lb_password = customtkinter.CTkLabel(master=frame, text='Contraseña:',
                                           font=("Times New Roman", 15, "bold"))
@@ -70,10 +70,10 @@ class Login:
             self.input_password.configure(show='')
 
     def login(self):
-        name = self.input_name.get()
+        email = self.input_email.get()
         password = self.input_password.get()
         for x in self.usuarios_pred:
-            if name == str(x.name):
+            if email == str(x.email):
                 if password == str(x.password):
                     user_window.UserWindow(self.usuarios_pred)
                     break
