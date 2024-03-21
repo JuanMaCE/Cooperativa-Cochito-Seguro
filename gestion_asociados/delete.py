@@ -1,8 +1,11 @@
 import customtkinter
+from CTkMessagebox import CTkMessagebox
+
 global texto_imagen
+global asociado_a_cambiar
 
 
-def main():
+def main(lista):
     ventana = cargar_datos()
     frame_1 = frame(ventana)
     labels_parte1(frame_1)
@@ -11,14 +14,37 @@ def main():
     ib_id = customtkinter.CTkEntry(master=frame_1, placeholder_text='Ingrese Codigo')
     ib_id.pack(pady=12, padx=10)
     ib_id.place(x=330, y=65)
+    posicion_a_editar = 0
 
-    button_busqueda = customtkinter.CTkButton(master=frame_1, text="Buscar", fg_color=color, width=180, height=45)
+    def buscar():
+        id_a_buscar = ib_id.get()
+        contador = 0
+        existe = False
+        for dato in lista:
+            if id_a_buscar == dato.devolver_id():
+                global asociado_a_cambiar
+                asociado_a_cambiar = dato
+                posicion_a_editar = contador
+                existe = True
+                break
+            contador += 1
+        if existe:
+            def eliminar():
+                eliminado = lista.delete_at(posicion_a_editar)
+                CTkMessagebox(title='APROBADO', message='SE ELIMINO CORRECTAMENTE A ' + str(eliminado))
+
+            button_deleate = customtkinter.CTkButton(master=frame_1, text="Eliminar", fg_color=color, width=180, height=45,
+                                                     command=eliminar)
+            button_deleate.pack(pady=100, padx=10)
+            button_deleate.place(x=10, y=150)
+        else:
+            CTkMessagebox(title='INEXISTENTE', message='No se encontro el ID')
+
+    button_busqueda = customtkinter.CTkButton(master=frame_1, text="Buscar", fg_color=color, width=180, height=45
+                                              , command=buscar)
     button_busqueda.pack(pady=100, padx=10)
     button_busqueda.place(x=10, y=100)
 
-    button_deleate = customtkinter.CTkButton(master=frame_1, text="Eliminar", fg_color=color, width=180, height=45)
-    button_deleate.pack(pady=100, padx=10)
-    button_deleate.place(x=10, y=150)
     return
 
 
