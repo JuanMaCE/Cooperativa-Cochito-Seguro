@@ -2,6 +2,7 @@ import customtkinter
 from gestion_asociados import menu_gestion_asociados
 from users import user_login
 from data_estructure.list.list import List
+from gestion_prestamo import menu_prestamos
 
 app = customtkinter.CTk()
 
@@ -12,6 +13,10 @@ def open_gestion():
 
 def open_users(user_pred):
     user_login.Login(user_pred)
+
+
+def open_prestamo():
+    menu_prestamos.main()
 
 
 def main_window(lista: List):
@@ -37,7 +42,7 @@ def buttons(frame, lista):
     button_gestion.place(x=50, y=10)
 
     bt_prestamos_bancarios = customtkinter.CTkButton(master=frame, text='Prestamos bancarios', height=100, width=160,
-                                                     font=("Arial", 20), fg_color="#3E4446")
+                                                     font=("Arial", 20), fg_color="#3E4446", command=open_prestamo)
 
     bt_prestamos_bancarios.pack(pady=10, padx=10)
     bt_prestamos_bancarios.place(x=50, y=150)
