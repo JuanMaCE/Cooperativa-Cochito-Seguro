@@ -61,6 +61,7 @@ class Prestamo:
         result += f"garantia: {self.garantia}, "
         result += f"archivos: {self.archivos}, "
         result += f"plan: {self.plan}, "
+        result += f"Historial de pagos: {self.historial_pagos}, "
         return result
 
 
@@ -98,6 +99,12 @@ class HistorialPagos:
         result += f"Restante Q. {self.restante}, "
         self.historial.append(result)
         new_status(codigo, status)
+
+    def __str__(self):
+        result = ""
+        for i in self.historial:
+            result += str(i)
+        return result
 
     def imprimir_historial(self):
         for i in self.historial:
@@ -177,3 +184,20 @@ def realizar_pago(codigo):
             i.historial_pagos.pagar(codigo)
     for x in prestamos:
         print(x)
+
+
+def generar_plan(ingresos, tiempo):
+    ingresos = float(ingresos)
+    tiempo = int(tiempo)
+    capacidad_pago = ingresos * 0.1
+    cuotas = tiempo
+    # actualizar(cuotas, capacidad_pago, ingresos):
+    interes_pagar = (cuotas * capacidad_pago) * ((cuotas // 3) * 0.01)
+    monto_maximo = cuotas * capacidad_pago - ((cuotas * capacidad_pago) * ((cuotas // 3) * 0.01))
+    pago_realizar = monto_maximo / cuotas
+    mensaje = ""
+    mensaje += "Monto a pagar: "+str(monto_maximo)+ "\n"
+    mensaje += "Pago por Cuota: "+ str(pago_realizar)+ "\n"
+    mensaje += "Intereses: " + str(interes_pagar)+ "\n"
+    mensaje += "Solicitud de credito: " + str(monto_maximo - interes_pagar)
+    CTkMessagebox(title='Plan generado', message=mensaje)

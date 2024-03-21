@@ -23,6 +23,7 @@ def main():
     button_solicitar.place(x=10, y=145)
     return
 
+
 def cargar_datos():
     customtkinter.set_appearance_mode('dark')
     customtkinter.set_default_color_theme('dark-blue')
