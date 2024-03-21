@@ -71,7 +71,7 @@ class HistorialPagos:
             self.acumulado += self.pago
             self.cuotas_restantes -= 1
             self.cuota += 1
-            self.fecha_pago = datetime.date
+            self.fecha_pago = datetime.date.today()
             self.restante -= self.pago
         result = f"Cuota No.{self.cuota}, "
         result += f"Pago Q.{self.pago}, "
@@ -79,10 +79,11 @@ class HistorialPagos:
         result += f"Acumulado Q.{self.acumulado}, "
         result += f"Restante Q. {self.restante}, "
         self.historial.append(result)
+        print("pago")
 
     def imprimir_historial(self):
         for i in self.historial:
-            print(i.transversal())
+            print(i)
 
 
 def solicitar():
@@ -131,12 +132,11 @@ def aprobar():
 
 def visualizar():
     for i in prestamos:
-        print(i.transversal())
+        i.historial_pagos.imprimir_historial()
 
 
 def realizar_pago():
     codigo = float(input("Codigo, LAYOUT: "))
     for i in prestamos:
         if i.search_id() == codigo:
-            print(i.historial())
-
+            i.historial_pagos.pagar()
