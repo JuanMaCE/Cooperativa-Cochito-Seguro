@@ -10,10 +10,11 @@ from users.user import User
 class EditData:
     def __init__(self, usuarios_pred):
         self.ventana = self.cargar_datos()
+        self.frame2 = self.frame_2(self.ventana)
         self.frame = self.frame1(self.ventana)
         self.usuarios_pred = usuarios_pred
         self.input_password = customtkinter.CTkEntry(master=self.frame, show='*', width=600)
-        self.labels_parte1(self.frame)
+        self.labels_parte1(self.frame, self.frame2)
         print(" ")
         self.ventana.mainloop()
 
@@ -34,21 +35,40 @@ class EditData:
 
     def frame1(self, ventana):
         frame = customtkinter.CTkFrame(master=ventana)
-        frame.pack(pady=10, padx=60, fill='both', ipady=60)
+        frame.pack(pady=0, padx=60, fill='both', ipady=80)
         return frame
 
-    def labels_parte1(self, frame):
-        lb_inbreso = customtkinter.CTkLabel(master=frame, text='Nuevos Datos',
+    def frame_2(self, ventana):
+        frame = customtkinter.CTkFrame(master=ventana)
+        frame.pack(pady=10, padx=60, fill='both', ipady=0)
+
+        return frame
+
+    def labels_parte1(self, frame, frame2):
+        lb_inbreso = customtkinter.CTkLabel(master=frame2, text='Actualizar Contraseña',
                                             font=("Times New Roman", 50, "bold"))
         lb_inbreso.pack(pady=400, padx=400, )
         lb_inbreso.place(x=10, y=0)
+
+        lb_id = customtkinter.CTkLabel(master=frame2, text='Ingresar ID:',
+                                       font=("Times New Roman", 15, "bold"))
+        lb_id.pack(pady=400, padx=400, )
+        lb_id.place(x=10, y=60)
+
+        self.input_id = customtkinter.CTkEntry(master=frame2, placeholder_text="Codigo de Usuario", width=600)
+        self.input_id.pack(padx=40, pady=40)
+        self.input_id.place(x=120, y=60)
+
+        bt_search = customtkinter.CTkButton(master=frame2, text='Buscar', command=self.search)
+        bt_search.pack(padx=20, pady=10)
+        bt_search.place(x=10, y=100)
 
         lb_name = customtkinter.CTkLabel(master=frame, text='Nombre:',
                                          font=("Times New Roman", 15, "bold"))
         lb_name.pack(pady=400, padx=400, )
         lb_name.place(x=10, y=60)
 
-        self.input_name = customtkinter.CTkEntry(master=frame, placeholder_text="Nombre", width=600)
+        self.input_name = customtkinter.CTkEntry(master=frame, placeholder_text="", width=600)
         self.input_name.pack(padx=40, pady=40)
         self.input_name.place(x=80, y=60)
 
@@ -57,7 +77,7 @@ class EditData:
         lb_email.pack(pady=400, padx=400, )
         lb_email.place(x=10, y=100)
 
-        self.input_email = customtkinter.CTkEntry(master=frame, placeholder_text="Nuevo Email", width=600)
+        self.input_email = customtkinter.CTkEntry(master=frame, placeholder_text="", width=600)
         self.input_email.pack(padx=40, pady=40)
         self.input_email.place(x=80, y=100)
 
@@ -77,7 +97,7 @@ class EditData:
         lb_puesto.pack(pady=400, padx=400, )
         lb_puesto.place(x=10, y=220)
 
-        self.input_puesto = customtkinter.CTkEntry(master=frame, placeholder_text="Nuevo Puesto", width=600)
+        self.input_puesto = customtkinter.CTkEntry(master=frame, placeholder_text="", width=600)
         self.input_puesto.pack(padx=40, pady=40)
         self.input_puesto.place(x=80, y=220)
 
@@ -91,14 +111,25 @@ class EditData:
         else:
             self.input_password.configure(show='')
 
-    def actualizar(self):
-        name = self.input_name.get()
+    def search(self):
+        id = int(self.input_id.get())
+        self.usuario_buscado = None
         for x in self.usuarios_pred:
-            if name == str(x.name):
-                email = self.input_email.get()
-                password = self.input_password.get()
-                puesto = self.input_puesto.get()
-                x.email = email
-                x.password = password
-                x.puesto = puesto
-                CTkMessagebox(title='', message='Realizado Correctamente')
+            if id == x.codigo:
+                self.usuario_buscado = x
+                self.input_name.configure(placeholder_text=str(x.name))
+                self.input_email.configure(placeholder_text=str(x.email))
+                self.input_puesto.configure(placeholder_text=str(x.puesto))
+
+    def actualizar(self):
+        password = self.input_password.get()
+        if password == self.usuario_buscado.password:
+            name = self.input_name.get()
+            email = self.input_email.get()
+            puesto = self.input_puesto.get()
+            self.usuario_buscado.name = name
+            self.usuario_buscado.email = email
+            self.usuario_buscado.puesto = puesto
+            CTkMessagebox(title='', message='Realizado Correctamente')
+        else:
+            CTkMessagebox(title='', message='Contraseña Incorrecta')

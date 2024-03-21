@@ -72,16 +72,11 @@ class Login:
     def login(self):
         email = self.input_email.get()
         password = self.input_password.get()
-        existe = False
         for x in self.usuarios_pred:
             if email == str(x.email):
                 if password == str(x.password):
                     x.status = True
-                    existe = True
-                    user_window.UserWindow(self.usuarios_pred)
+                    user_window.UserWindow(self.usuarios_pred, x)
                     break
                 else:
-                    existe = True
-                    CTkMessagebox(title='Advertencia', message='Usuario o Contraseña Incorrecta')
-        if not existe:
-            CTkMessagebox(title='Advertencia', message='Usuario o Contraseña Incorrecta')
+                    CTkMessagebox(title='Advertencia', message='Contraseña Incorrecta')

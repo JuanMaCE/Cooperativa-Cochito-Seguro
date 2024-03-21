@@ -5,7 +5,8 @@ color = "#3E4446"
 
 
 class UserWindow:
-    def __init__(self, users_pred):
+    def __init__(self, users_pred, user_online):
+        self.user_online = user_online
         self.ventana = self.cargar_datos()
         self.frame = self.frame1(self.ventana)
         self.labels_parte1(self.frame)
@@ -50,6 +51,13 @@ class UserWindow:
                                             font=("Times New Roman", 50, "bold"))
         lb_inbreso.pack(pady=400, padx=400, )
         lb_inbreso.place(x=10, y=0)
+
+        lb_status = customtkinter.CTkLabel(master=frame, text='', font=('Times New Roman', 12))
+        lb_status.pack(pady=400, padx=400)
+        lb_status.place(x=700, y=0)
+
+        if self.user_online.status:
+            lb_status.configure(text=self.user_online.name + ' - En Línea')
 
         button_registro = customtkinter.CTkButton(master=frame, text="Registrar", fg_color=color, height=100, width=210,
                                                   command=self.open_registro)

@@ -1,15 +1,17 @@
 import customtkinter
 from CTkMessagebox import CTkMessagebox
 from users import user_window
+from users.user import User
 
 
 class EditPassword:
     def __init__(self, usuarios):
         self.ventana = self.cargar_datos()
+        self.frame2 = self.frame_2(self.ventana)
         self.frame = self.frame1(self.ventana)
         self.usuarios_pred = usuarios
         self.input_password = customtkinter.CTkEntry(master=self.frame, show='*', width=600)
-        self.labels_parte1(self.frame)
+        self.labels_parte1(self.frame, self.frame2)
         print(" ")
         self.ventana.mainloop()
 
@@ -30,21 +32,40 @@ class EditPassword:
 
     def frame1(self, ventana):
         frame = customtkinter.CTkFrame(master=ventana)
-        frame.pack(pady=10, padx=60, fill='both', ipady=60)
+        frame.pack(pady=0, padx=60, fill='both', ipady=80)
         return frame
 
-    def labels_parte1(self, frame):
-        lb_inbreso = customtkinter.CTkLabel(master=frame, text='Actualizar Contraseña',
+    def frame_2(self, ventana):
+        frame = customtkinter.CTkFrame(master=ventana)
+        frame.pack(pady=10, padx=60, fill='both', ipady=0)
+
+        return frame
+
+    def labels_parte1(self, frame, frame2):
+        lb_inbreso = customtkinter.CTkLabel(master=frame2, text='Actualizar Contraseña',
                                             font=("Times New Roman", 50, "bold"))
         lb_inbreso.pack(pady=400, padx=400, )
         lb_inbreso.place(x=10, y=0)
+
+        lb_id = customtkinter.CTkLabel(master=frame2, text='Ingresar ID:',
+                                         font=("Times New Roman", 15, "bold"))
+        lb_id.pack(pady=400, padx=400, )
+        lb_id.place(x=10, y=60)
+
+        self.input_id = customtkinter.CTkEntry(master=frame2, placeholder_text="Codigo de Usuario", width=600)
+        self.input_id.pack(padx=40, pady=40)
+        self.input_id.place(x=120, y=60)
+
+        bt_search = customtkinter.CTkButton(master=frame2, text='Buscar', command=self.search)
+        bt_search.pack(padx=20, pady=10)
+        bt_search.place(x=10, y=100)
 
         lb_name = customtkinter.CTkLabel(master=frame, text='Nombre:',
                                          font=("Times New Roman", 15, "bold"))
         lb_name.pack(pady=400, padx=400, )
         lb_name.place(x=10, y=60)
 
-        self.input_name = customtkinter.CTkEntry(master=frame, placeholder_text="Nombre", width=600)
+        self.input_name = customtkinter.CTkLabel(master=frame, text='')
         self.input_name.pack(padx=40, pady=40)
         self.input_name.place(x=80, y=60)
 
@@ -66,7 +87,7 @@ class EditPassword:
 
         self.input_new_password = customtkinter.CTkEntry(master=self.frame, width=600)
         self.input_new_password.pack(padx=40, pady=40)
-        self.input_new_password.place(x=130, y=180)
+        self.input_new_password.place(x=140, y=180)
 
         bt_registrar = customtkinter.CTkButton(master=frame, text='Actualizar', command=self.actualizar)
         bt_registrar.pack(padx=20, pady=10)
@@ -78,15 +99,19 @@ class EditPassword:
         else:
             self.input_password.configure(show='')
 
+    def search(self):
+        id = int(self.input_id.get())
+        self.usuario_buscado = None
+        for x in self.usuarios_pred:
+            if id == x.codigo:
+                self.usuario_buscado = x
+                self.input_name.configure(text=str(x.name))
+
     def actualizar(self):
-        name = self.input_name.get()
         password = self.input_password.get()
         new_password = self.input_new_password.get()
-        for x in self.usuarios_pred:
-            if name == str(x.name):
-                if password == str(x.password):
-                    x.password = new_password
-                    CTkMessagebox(title='', message='Realizado Correctamente')
-                    break
-                else:
-                    CTkMessagebox(title='Advertencia', message='Contraseña Incorrecta')
+        if password == self.usuario_buscado.password:
+            self.usuario_buscado.password = new_password
+            CTkMessagebox(title='', message='Realizado Correctamente')
+        else:
+            CTkMessagebox(title='Advertencia', message='Contraseña Incorrecta')
