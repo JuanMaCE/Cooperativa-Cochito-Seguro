@@ -29,7 +29,7 @@ def open_edit():
 
 
 def open_delete():
-    delete.main()
+    delete.main(asociados)
 
 
 def cargar_datos():
