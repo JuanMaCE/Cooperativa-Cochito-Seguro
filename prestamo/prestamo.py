@@ -57,14 +57,23 @@ class HistorialPagos:
         self.restante = restante
         self.fecha_pago = datetime.date
         self.historial = List()
+        self.saldo_original = restante
 
     def pagar(self):
-        self.acumulado += self.pago
-        self.cuotas_restantes -= 1
-        self.cuota += 1
-        self.fecha_pago = datetime.date
-        self.restante -= self.pago
-        result = f"Cuota {self.cuota}, "
+        x = self.acumulado + self.pago
+        if x >= self.saldo_original:
+            self.acumulado = self.saldo_original
+            self.pago = x - self.acumulado
+            self.cuota += 1
+            self.fecha_pago = datetime.date
+            self.restante = 0
+        else:
+            self.acumulado += self.pago
+            self.cuotas_restantes -= 1
+            self.cuota += 1
+            self.fecha_pago = datetime.date
+            self.restante -= self.pago
+        result = f"Cuota No.{self.cuota}, "
         result += f"Pago Q.{self.pago}, "
         result += f"Fecha .{self.fecha_pago}, "
         result += f"Acumulado Q.{self.acumulado}, "
