@@ -3,22 +3,40 @@ from CTkMessagebox import CTkMessagebox
 from users.user import User
 import main
 from data_estructure.list.list import List
-
+from data_estructure.circular_list.circular_list import CircularList
+from typing import TypeVar
+from gestion_asociados.datos_asociados.asociado import Asociado
+T = TypeVar("T")
 user_pred = List[User]()
+asociados = CircularList[T]()
 
 
 def usuarios_predeterminados():
+    # CARGAR USUARIOS
     user_pred.append(User(12345, 'Juan', 'juanmc228@gmail.com', 'Admin123', 'Administrador'))
     user_pred.append(User(54321, 'Roger', 'rogcl228@gmail.com', 'Admin123', 'Administrador'))
     user_pred.append(User(56789, 'Vyn', 'vynla228@gmail.com', 'Admin123', 'Administrador'))
     user_pred.append(User(98765, 'Chat', 'chatman228@gmail.com', 'Admin123', 'Administrador'))
     user_pred.append(User(98765, 'admin', 'chatman228@gmail.com', '1234', 'Administrador'))
-    Login(user_pred)
+
+    # CARGAR ASOCIADOS
+
+    primer_a = Asociado("Marcos", "Ciudad", "47121112", "22323", "18810019", "XELAPAN")
+    primer_a.cambiar_codigo(1)
+    asociados.append(primer_a)
+    segundo_a = Asociado("Antonio ", "Ciudad", "563728", "1888", "9999", "no tenia trabajo")
+    segundo_a.cambiar_codigo(2)
+    asociados.append(segundo_a)
+    tercer_a = Asociado("ROGELIO", "Ciudad", "761293", "99910101", "7776662", "Ciudad Cristal")
+    tercer_a.cambiar_codigo(3)
+    asociados.append(tercer_a)
+
+    Login(user_pred, asociados)
 
 
 
 class Login:
-    def __init__(self, usuarios):
+    def __init__(self, usuarios, asociados):
         self.ventana = self.cargar_datos()
         self.frame = self.frame1(self.ventana)
         self.usuarios_pred = usuarios
@@ -89,7 +107,7 @@ class Login:
         for x in self.usuarios_pred:
             if name == str(x.name):
                 if password == str(x.password):
-                    main.main_window(user_pred)
+                    main.main_window(user_pred, asociados)
                     break
                 else:
                     CTkMessagebox(title='Advertencia', message='Contraseña Incorrecta')

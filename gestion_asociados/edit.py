@@ -54,13 +54,14 @@ def main(lista: CircularList):
         ib_num_dpi.pack(pady=100, padx=10)
         ib_num_dpi.place(x=300, y=113)
 
-        ib_nit = customtkinter.CTkEntry(master=frame, placeholder_text=str(asociado_a_cambiar.devolver_nit()), width=180,
+        ib_nit = customtkinter.CTkEntry(master=frame, placeholder_text=str(asociado_a_cambiar.devolver_nit()),
+                                        width=180,
                                         height=35)
         ib_nit.pack(pady=100, padx=10)
         ib_nit.place(x=580, y=110)
 
         ib_ref_personales = customtkinter.CTkEntry(master=frame,
-                                                   placeholder_text=str(asociado_a_cambiar.referencias_personales()),
+                                                   placeholder_text="str(asociado_a_cambiar.referencias_personales())",
                                                    width=400)
         ib_ref_personales.pack(pady=100, padx=10)
         ib_ref_personales.place(x=210, y=210)
