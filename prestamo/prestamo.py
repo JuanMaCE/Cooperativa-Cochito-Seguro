@@ -1,7 +1,9 @@
+import datetime
 import random
 from data_estructure.list.list import List
+from datetime import date
 
-prestamo = List()
+prestamos = List()
 
 
 class Prestamo:
@@ -31,8 +33,48 @@ class Prestamo:
         result += f"garantia: {self.garantia}, "
         result += f"archivos: {self.archivos}, "
         result += f"plan: {self.plan}, "
-        result += f"historial: {self.historial_pagos}, "
         return result
+
+    def change_status(self, status):
+        self.status = status
+
+    def search_id(self):
+        return int(self.id_prestamo)
+
+    def historial(self):
+        result = ""
+        for i in self.historial_pagos:
+            result += str(i)
+        return result
+
+
+class HistorialPagos:
+    def __init__(self, cuotas, restante):
+        self.cuota = 0
+        self.cuotas_restantes = cuotas
+        self.pago = 0
+        self.acumulado = 0
+        self.restante = restante
+        self.fecha_pago = datetime.date
+        self.historial = List()
+
+    def pagar(self, pago):
+        self.pago = pago
+        self.acumulado += pago
+        self.cuotas_restantes -= 1
+        self.cuota += 1
+        self.fecha_pago = datetime.date
+        self.restante -= pago
+        result = f"Cuota {self.cuota}, "
+        result += f"Pago Q.{self.pago}, "
+        result += f"Fecha .{self.fecha_pago}, "
+        result += f"Acumulado Q.{self.acumulado}, "
+        result += f"Restante Q. {self.restante}, "
+        self.historial.append(result)
+
+    def imprimir_historial(self):
+        for i in self.historial:
+            print(i.transversal())
 
 
 def solicitar():
@@ -49,10 +91,12 @@ def solicitar():
     garantia = input("GARANTIA, LAYOUT: ")
     archivo = input("ARCHIVOS, LAYOUT: ")
     plan_pagos = "Numero de Pagos: ", cuotas, "Pago minimo en cuota: ", str(int(monto_aprobado // cuotas)+1)
-    historial_pagos = 0
+    historial_pagos = HistorialPagos(cuotas, monto_aprobado)
     x = Prestamo(num_prestamo, 10001, "Generado",  monto_solicitado, cuotas, monto_aprobado, ingresos,
              garantia, archivo, plan_pagos, historial_pagos)
     print(x.transversal())
+    prestamos.append(x)
+
 
 
 def generar_plan():
@@ -70,17 +114,25 @@ def generar_plan():
     print(monto_maximo - interes_pagar, "solicitar")
 
 
-generar_plan()
 solicitar()
 
 
 def aprobar():
     codigo = float(input("Codigo, LAYOUT: "))
+    for i in prestamos:
+        if i.search_id() == codigo:
+            i.change_status("Aprobado")
 
 
 def visualizar():
-    pass
+    for i in prestamos:
+        print(i.transversal())
 
 
 def realizar_pago():
-    pass
+    codigo = float(input("Codigo, LAYOUT: "))
+    for i in prestamos:
+        if i.search_id() == codigo:
+            print(i.historial())
+
+realizar_pago()
