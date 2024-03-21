@@ -17,15 +17,10 @@ def main(asociados):
     color = "#3E4446"
     labels_parte1(frame)
 
-    # IB
-    ib_id = customtkinter.CTkEntry(master=frame, placeholder_text='Ingrese Codigo')
-    ib_id.pack(pady=12, padx=10)
-    ib_id.place(x=110, y=67)
-
-    ib_name = customtkinter.CTkEntry(master=frame, placeholder_text='Ingrese Nombre del producto', width=400,
+    ib_name = customtkinter.CTkEntry(master=frame, placeholder_text='Ingrese Nombre del producto', width=500,
                                      height=35)
     ib_name.pack(pady=100, padx=10)
-    ib_name.place(x=410, y=63)
+    ib_name.place(x=120, y=60)
     ib_direccion = customtkinter.CTkEntry(master=frame, placeholder_text='Ingrese su dirección actual', width=580,
                                           height=35)
     ib_direccion.pack(pady=100, padx=10)
@@ -141,13 +136,9 @@ def labels_parte1(frame):
     lb_inbreso.pack(pady=400, padx=400, )
     lb_inbreso.place(x=10, y=0)
 
-    lb_id = customtkinter.CTkLabel(master=frame, text='Codigo', font=("Times New Roman", 30))
-    lb_id.pack(pady=400, padx=400, )
-    lb_id.place(x=10, y=60)
-
     lb_nombre = customtkinter.CTkLabel(master=frame, text='Nombre', font=("Times New Roman", 30))
     lb_nombre.pack(pady=400, padx=400)
-    lb_nombre.place(x=290, y=60)
+    lb_nombre.place(x=10, y=60)
 
     lb_direccion_actual = customtkinter.CTkLabel(master=frame, text='Dirección Actual', font=("Times New Roman", 30))
     lb_direccion_actual.pack(pady=400, padx=400)
