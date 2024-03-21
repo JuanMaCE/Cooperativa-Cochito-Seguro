@@ -29,7 +29,7 @@ def cargar_datos():
     # root
     ventana = customtkinter.CTkToplevel()
     ventana.grab_set()
-    ventana.title("Aprobar prestamo")
+    ventana.title("Plan de pagos")
     ventana.geometry('950x195')
     return ventana
 

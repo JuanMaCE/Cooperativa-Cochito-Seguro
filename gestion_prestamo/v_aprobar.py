@@ -9,7 +9,7 @@ def main():
     labels_parte1(frame_1)
     color = "#3E4446"
     # IB
-    ib_id = customtkinter.CTkEntry(master=frame_1, placeholder_text='Monto Solicitado')
+    ib_id = customtkinter.CTkEntry(master=frame_1, placeholder_text='Codigo del credito')
     ib_id.pack(pady=12, padx=10)
     ib_id.place(x=330, y=65)
 
@@ -43,6 +43,6 @@ def labels_parte1(frame_u):
     lb_inbreso.pack(pady=400, padx=400)
     lb_inbreso.place(x=10, y=0)
 
-    lb_tipo = customtkinter.CTkLabel(master=frame_u, text='Ingrese el Monto', font=("Times New Roman", 30))
+    lb_tipo = customtkinter.CTkLabel(master=frame_u, text='Ingrese codigo de credito', font=("Times New Roman", 30))
     lb_tipo.pack(pady=400, padx=400)
     lb_tipo.place(x=10, y=60)

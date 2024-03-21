@@ -75,7 +75,7 @@ class HistorialPagos:
         self.historial = List()
         self.saldo_original = restante
 
-    def pagar(self):
+    def pagar(self, codigo):
         x = self.acumulado + self.pago
         if x >= self.saldo_original:
             self.acumulado = self.saldo_original
@@ -83,19 +83,21 @@ class HistorialPagos:
             self.cuota += 1
             self.fecha_pago = datetime.date
             self.restante = 0
+            status = "Finalizado"
         else:
             self.acumulado += self.pago
             self.cuotas_restantes -= 1
             self.cuota += 1
             self.fecha_pago = datetime.date.today()
             self.restante -= self.pago
+            status = "En curso"
         result = f"Cuota No.{self.cuota}, "
         result += f"Pago Q.{self.pago}, "
         result += f"Fecha .{self.fecha_pago}, "
         result += f"Acumulado Q.{self.acumulado}, "
         result += f"Restante Q. {self.restante}, "
         self.historial.append(result)
-        print("pago")
+        new_status(codigo, status)
 
     def imprimir_historial(self):
         for i in self.historial:
@@ -125,7 +127,7 @@ def solicitar(monto_solicitado, ingresos, cuotas, garantia, archivo, asociado, l
                          garantia, archivo, plan_pagos, historial_pagos)
             print(x.transversal())
             prestamos.append(x)
-            CTkMessagebox(title='APROBADO', message='SE APROBO SU PRESTAMO')
+            CTkMessagebox(title='APROBADO', message='Prestamo ingresado correctamente')
             break
     if not en_lista_o_no:
         CTkMessagebox(title='Advertencia', message='No se encontro el usuario')
@@ -156,6 +158,12 @@ def aprobar(codigo):
             i.change_status("Aprobado")
 
 
+def new_status(codigo, status):
+    for i in prestamos:
+        if i.search_id() == int(codigo):
+            i.change_status(status)
+
+
 def visualizar():
     lista = List()
     for i in prestamos:
@@ -166,4 +174,6 @@ def visualizar():
 def realizar_pago(codigo):
     for i in prestamos:
         if i.search_id() == codigo:
-            i.historial_pagos.pagar()
+            i.historial_pagos.pagar(codigo)
+    for x in prestamos:
+        print(x)

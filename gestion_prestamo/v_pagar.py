@@ -8,7 +8,7 @@ def main():
     labels_parte1(frame_1)
     color = "#3E4446"
     # IB
-    ib_id = customtkinter.CTkEntry(master=frame_1, placeholder_text='Ingrese Codigo:')
+    ib_id = customtkinter.CTkEntry(master=frame_1, placeholder_text='Ingrese Codigo Prestamo:')
     ib_id.pack(pady=12, padx=10)
     ib_id.place(x=330, y=65)
 
