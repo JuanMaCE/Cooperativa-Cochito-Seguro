@@ -36,9 +36,9 @@ def labels_parte1(frame_u):
 
     t = 70
     lista = visualizar()
-    for x in lista:
-        lb_ver = customtkinter.CTkLabel(master=frame, text=x,
-                                        font=("Times New Roman", 15))
-        lb_ver.pack(pady=400, padx=400, )
-        lb_ver.place(x=10, y=t)
-        t += 30
+
+    lb_ver = customtkinter.CTkLabel(master=frame_u, text=lista,
+                                    font=("Times New Roman", 15))
+    lb_ver.pack(pady=400, padx=400, )
+    lb_ver.place(x=10, y=50)
+

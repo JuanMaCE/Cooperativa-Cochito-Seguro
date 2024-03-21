@@ -157,10 +157,11 @@ def aprobar(codigo):
 
 
 def visualizar():
-    lista = List()
+    texto = " "
     for i in prestamos:
-        lista.append(i)
-    return lista
+        texto += str(i) + '\n'
+    return texto
+
 
 
 def realizar_pago(codigo):
