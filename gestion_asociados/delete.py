@@ -1,4 +1,6 @@
 import customtkinter
+from CTkMessagebox import CTkMessagebox
+
 global texto_imagen
 global asociado_a_cambiar
 
@@ -26,7 +28,8 @@ def main(lista):
             contador += 1
 
         def eliminar():
-            lista.delete_at(posicion_a_editar)
+            eliminado = lista.delete_at(posicion_a_editar)
+            CTkMessagebox(title='APROBADO', message='SE ELIMINO CORRECTAMENTE A ' + str(eliminado))
 
         button_deleate = customtkinter.CTkButton(master=frame_1, text="Eliminar", fg_color=color, width=180, height=45,
                                                  command=eliminar)

@@ -3,6 +3,9 @@ import customtkinter
 from tkinter import filedialog
 import shutil
 import os
+
+from CTkMessagebox import CTkMessagebox
+
 global texto_imagen
 from gestion_asociados.datos_asociados.asociado import Asociado
 global asociado
@@ -98,6 +101,7 @@ def main(asociados):
         global asociado
         asociado = Asociado(name, adress, phone, dpi, nit, referencias)
         asociados.append(asociado)
+        CTkMessagebox(title='APROBADO', message='SE AGREGO CORRECTAMENTE SU ASOCIADO')
 
     # confirmación
     button_confirm_1 = customtkinter.CTkButton(master=frame, text="Confirmar", fg_color=color, width=180, height=45,

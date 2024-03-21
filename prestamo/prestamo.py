@@ -21,6 +21,7 @@ class Prestamo:
         self.archivos = archivos
         self.plan = plan_pagos
         self.historial_pagos = historial_pagos
+        self.lista_asociados = None
 
     def transversal(self) -> str:
         result = f"Id prestamo: {self.id_prestamo}, "
@@ -47,6 +48,8 @@ class Prestamo:
             result += str(i)
         return result
 
+    def cargar_asociados(self, lista):
+        self.lista_asociados = lista
 
 class HistorialPagos:
     def __init__(self, cuotas, restante, pago):

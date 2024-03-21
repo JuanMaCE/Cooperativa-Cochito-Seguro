@@ -15,8 +15,8 @@ def open_users(user_pred):
     user_login.Login(user_pred)
 
 
-def open_prestamo():
-    menu_prestamos.main()
+def open_prestamo(asociados):
+    menu_prestamos.main(asociados)
 
 
 def main_window(list_usuarios, list_asociaods):
@@ -44,7 +44,7 @@ def buttons(frame, list_usuarios, list_asociaods):
 
     bt_prestamos_bancarios = customtkinter.CTkButton(master=frame, text='Prestamos bancarios', height=100, width=160,
                                                      font=("Arial", 20), fg_color="#3E4446",
-                                                     command=lambda: open_prestamo)
+                                                     command=lambda: open_prestamo(list_asociaods))
 
     bt_prestamos_bancarios.pack(pady=10, padx=10)
     bt_prestamos_bancarios.place(x=50, y=150)

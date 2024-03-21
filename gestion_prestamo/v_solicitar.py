@@ -3,7 +3,7 @@ global texto_imagen
 from gestion_prestamo.prestamo import solicitar
 
 
-def main():
+def main(list_asociados):
     ventana = cargar_datos()
     frame_1 = frame(ventana)
     labels_parte1(frame_1)
@@ -33,10 +33,10 @@ def main():
     ib_asociado.pack(pady=12, padx=10)
     ib_asociado.place(x=330, y=265)
 
-    button_solicitar = customtkinter.CTkButton(master=frame_1, text="Solicitar", fg_color=color, width=180, height=45
-                                             ,command=lambda: solicitar(ib_id.get(), ib_ingresos.get(), ib_cuotas.get(),
-                                                                        ib_garantia.get(), ib_archivo.get(),
-                                                                        ib_asociado.get()))
+    button_solicitar = customtkinter.CTkButton(master=frame_1, text="Solicitar", fg_color=color, width=180, height=45,
+                                               command=lambda: solicitar(ib_id.get(), ib_ingresos.get(), ib_cuotas.get()
+                                                                         , ib_garantia.get(), ib_archivo.get(),
+                                                                         ib_asociado.get(), list_asociados))
     button_solicitar.pack(pady=100, padx=10)
     button_solicitar.place(x=10, y=300)
     return

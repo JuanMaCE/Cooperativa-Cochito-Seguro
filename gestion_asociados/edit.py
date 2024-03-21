@@ -3,6 +3,9 @@ import customtkinter
 from tkinter import filedialog
 import shutil
 import os
+
+from CTkMessagebox import CTkMessagebox
+
 global texto_imagen
 from data_estructure.circular_list.circular_list import CircularList
 from gestion_asociados.datos_asociados.asociado import Asociado
@@ -31,6 +34,7 @@ def main(lista: CircularList):
                 global asociado_a_cambiar
                 asociado_a_cambiar = dato
                 posicion_a_editar = contador
+                CTkMessagebox(title='APROBADO', message='SE ENCONTRO CORRECTAMENTE A ' + str(asociado_a_cambiar))
                 break
             contador += 1
         ib_name = customtkinter.CTkEntry(master=frame, placeholder_text=str(asociado_a_cambiar.devolver_nomre()),
@@ -118,6 +122,7 @@ def main(lista: CircularList):
             print("se elimino:  ", lista.delete_at(posicion_a_editar))
             asociado.cambiar_codigo(ib_id.get())
             lista.insert_at(asociado, posicion_a_editar)
+            CTkMessagebox(title='APROBADO', message='SE CORRIGIO CORRECTAMENTE A ' + str(asociado_a_cambiar))
 
         # confirmación
         button_confirm_2 = customtkinter.CTkButton(master=frame, text="Confirmar", fg_color=color, width=180, height=45

@@ -102,11 +102,12 @@ class HistorialPagos:
             print(i)
 
 
-def solicitar(monto_solicitado,ingresos,cuotas,garantia, archivo, asociado):
-    #necesito lista de usuarios
-    #aqui
+def solicitar(monto_solicitado, ingresos, cuotas, garantia, archivo, asociado, lista_asociados):
+    lista_usuarios = lista_asociados
+    en_lista_o_no = False
     for x in lista_usuarios:
         if asociado == str(x.codigo_asociado):
+            en_lista_o_no = True
             ingresos = float(ingresos)
             cuotas = int(cuotas)
             monto_solicitado = float(monto_solicitado)
@@ -124,9 +125,11 @@ def solicitar(monto_solicitado,ingresos,cuotas,garantia, archivo, asociado):
                          garantia, archivo, plan_pagos, historial_pagos)
             print(x.transversal())
             prestamos.append(x)
+            CTkMessagebox(title='APROBADO', message='SE APROBO SU PRESTAMO')
             break
-        else:
-            CTkMessagebox(title='Advertencia', message='Contraseña Incorrecta')
+    if not en_lista_o_no:
+        CTkMessagebox(title='Advertencia', message='No se encontro el usuario')
+
 
 
 

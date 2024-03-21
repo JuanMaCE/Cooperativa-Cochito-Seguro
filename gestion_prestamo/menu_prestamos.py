@@ -1,22 +1,23 @@
 import customtkinter
-from gestion_prestamo import v_aprobar, v_generar, v_pagar, v_solicitar, v_visualizar
+from gestion_prestamo import v_aprobar, v_generar, v_pagar, v_solicitar, v_visualizar, prestamo
 from gestion_prestamo.prestamo import solicitar, generar_plan, aprobar, visualizar, realizar_pago
+
 
 color = "#3E4446"
 
 
-def main():
+def main(list_asociados):
     ventana = cargar_datos()
     frame = frame1(ventana)
-    labels_parte1(frame)
+    labels_parte1(frame, list_asociados)
 
     ventana.mainloop()
 
     return
 
 
-def open_solicitar():
-    v_solicitar.main()
+def open_solicitar(list_asociados):
+    v_solicitar.main(list_asociados)
 
 
 def open_generar():
@@ -51,14 +52,14 @@ def frame1(ventana):
     return frame
 
 
-def labels_parte1(frame, ):
+def labels_parte1(frame, lista_asociados):
     lb_inbreso = customtkinter.CTkLabel(master=frame, text='Menú Gestión Prestamos',
                                         font=("Times New Roman", 50, "bold"))
     lb_inbreso.pack(pady=400, padx=400, )
     lb_inbreso.place(x=10, y=0)
 
     button_solicitar = customtkinter.CTkButton(master=frame, text="Solicitar", fg_color=color, height=100, width=210,
-                                             command=open_solicitar)
+                                               command=lambda: open_solicitar(lista_asociados))
     button_solicitar.pack(pady=100, padx=10)
     button_solicitar.place(x=10, y=100)
 
