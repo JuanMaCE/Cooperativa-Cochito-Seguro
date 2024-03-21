@@ -1,10 +1,13 @@
 import random
+from data_estructure.list.list import List
+
+prestamo = List()
 
 
 class Prestamo:
     def __init__(self, id_prestamo: int, id_asociado: int, status: str, monto_solicitado: float,
-                 cuotas: int, monto_aprobado: float, ingresos: float, garantia: str,
-                 archivos, plan_pagos: str, historial_pagos):
+                 cuotas: int, monto_aprobado: float, ingresos: float, garantia,
+                 archivos, plan_pagos: tuple, historial_pagos):
         self.id_prestamo = id_prestamo
         self.id_asociado = id_asociado
         self.status = status
@@ -52,10 +55,13 @@ def solicitar():
     print(x.transversal())
 
 
-solicitar()
-solicitar()
 def generar_plan():
-    pass
+    ingresos = float(input("Ingresos mensuales, LAYOUT: "))
+    capacidad_pago = ingresos * 0.1
+    cuotas = int(input("Coutas solicitadas, LAYOUT: "))
+    # actualizar(cuotas, capacidad_pago, ingresos):
+    monto_al_optar = cuotas * capacidad_pago - ((cuotas * capacidad_pago) * ((cuotas // 3) * 0.05))
+    print(monto_al_optar, "Boton en layout")
 
 
 def aprobar():
