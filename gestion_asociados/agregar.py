@@ -4,11 +4,11 @@ from tkinter import filedialog
 import shutil
 import os
 global texto_imagen
+from gestion_asociados.datos_asociados.asociado import Asociado
+global asociado
 
-listas = [1, 2, 3, 4, 5, 6]
 
-
-def main():
+def main(asociados):
     ventana = cargar_datos()
     frame = frame1(ventana)
     color = "#3E4446"
@@ -51,6 +51,7 @@ def main():
     cb_busqueda.pack(pady=400, padx=400, )
     cb_busqueda.place(x=150, y=200)
 
+
     def seleccionar_imagen():
         get_image = filedialog.askopenfilenames(title="SELECT IMAGE",
                                                 filetypes=(("png", "*.png"), ("jpg", "*.jpg"), ("Allfile", "*.*")))
@@ -77,7 +78,7 @@ def main():
         texto_image = ""
         for i in range(len(texto_final_alrevez)):
             texto_image += texto_final_alrevez[-i-1]
-        global texto_imagen
+        global texto_imagen, new_asociado
         texto_imagen = texto_image
 
     # botones
@@ -87,13 +88,29 @@ def main():
     button_select_img.pack(pady=100, padx=10)
     button_select_img.place(x=630, y=207)
 
+    def recoger_informacion():
+        name = ib_name.get()
+        adress = ib_direccion.get()
+        phone = ib_tel.get()
+        dpi = ib_num_dpi.get()
+        nit = ib_nit.get()
+        referencias = ib_ref_personales.get()
+        global asociado
+        asociado = Asociado(name, adress, phone, dpi, nit, referencias)
+        asociados.append(asociado)
+
     # confirmación
-    button_confirm_1 = customtkinter.CTkButton(master=frame, text="Confirmar", fg_color=color, width=180, height=45)
+    button_confirm_1 = customtkinter.CTkButton(master=frame, text="Confirmar", fg_color=color, width=180, height=45,
+                                               command=recoger_informacion)
     button_confirm_1.pack(pady=100, padx=10)
     button_confirm_1.place(x=630, y=240)
     ventana.mainloop()
+    return
 
-    return listas
+
+def retornar_informacion():
+    return asociado
+
 
 
 def cargar_datos():

@@ -1,6 +1,20 @@
 import customtkinter
 from CTkMessagebox import CTkMessagebox
-from users import user_window
+from users.user import User
+import main
+from data_estructure.list.list import List
+
+user_pred = List[User]()
+
+
+def usuarios_predeterminados():
+    user_pred.append(User(12345, 'Juan', 'juanmc228@gmail.com', 'Admin123', 'Administrador'))
+    user_pred.append(User(54321, 'Roger', 'rogcl228@gmail.com', 'Admin123', 'Administrador'))
+    user_pred.append(User(56789, 'Vyn', 'vynla228@gmail.com', 'Admin123', 'Administrador'))
+    user_pred.append(User(98765, 'Chat', 'chatman228@gmail.com', 'Admin123', 'Administrador'))
+    user_pred.append(User(98765, 'admin', 'chatman228@gmail.com', '1234', 'Administrador'))
+    Login(user_pred)
+
 
 
 class Login:
@@ -21,7 +35,7 @@ class Login:
         # root
         ventana = customtkinter.CTkToplevel()
         ventana.grab_set()
-        ventana.title("Edición de Usuarios")
+        ventana.title("COOPERATIVA COCHITO SEGURO")
         ventana.geometry("1000x300")
 
         # buttons
@@ -75,7 +89,10 @@ class Login:
         for x in self.usuarios_pred:
             if name == str(x.name):
                 if password == str(x.password):
-                    user_window.UserWindow(self.usuarios_pred)
+                    main.main_window(user_pred)
                     break
                 else:
                     CTkMessagebox(title='Advertencia', message='Contraseña Incorrecta')
+
+
+usuarios_predeterminados()

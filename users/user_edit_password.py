@@ -3,7 +3,7 @@ from CTkMessagebox import CTkMessagebox
 from users import user_window
 
 
-class Login:
+class EditPassword:
     def __init__(self, usuarios):
         self.ventana = self.cargar_datos()
         self.frame = self.frame1(self.ventana)
@@ -34,7 +34,7 @@ class Login:
         return frame
 
     def labels_parte1(self, frame):
-        lb_inbreso = customtkinter.CTkLabel(master=frame, text='Iniciar Sesión',
+        lb_inbreso = customtkinter.CTkLabel(master=frame, text='Actualizar Contraseña',
                                             font=("Times New Roman", 50, "bold"))
         lb_inbreso.pack(pady=400, padx=400, )
         lb_inbreso.place(x=10, y=0)
@@ -44,7 +44,7 @@ class Login:
         lb_name.pack(pady=400, padx=400, )
         lb_name.place(x=10, y=60)
 
-        self.input_name = customtkinter.CTkEntry(master=frame, placeholder_text="Nombre Completo", width=600)
+        self.input_name = customtkinter.CTkEntry(master=frame, placeholder_text="Nombre", width=600)
         self.input_name.pack(padx=40, pady=40)
         self.input_name.place(x=80, y=60)
 
@@ -59,7 +59,16 @@ class Login:
         switch_password.pack(padx=20, pady=10)
         switch_password.place(x=10, y=140)
 
-        bt_registrar = customtkinter.CTkButton(master=frame, text='Log In', command=self.login)
+        lb_new_password = customtkinter.CTkLabel(master=frame, text='Nueva Contraseña:',
+                                             font=("Times New Roman", 15, "bold"))
+        lb_new_password.pack(pady=400, padx=400, )
+        lb_new_password.place(x=10, y=180)
+
+        self.input_new_password = customtkinter.CTkEntry(master=self.frame, width=600)
+        self.input_new_password.pack(padx=40, pady=40)
+        self.input_new_password.place(x=130, y=180)
+
+        bt_registrar = customtkinter.CTkButton(master=frame, text='Actualizar', command=self.actualizar)
         bt_registrar.pack(padx=20, pady=10)
         bt_registrar.place(x=700, y=220)
 
@@ -69,13 +78,15 @@ class Login:
         else:
             self.input_password.configure(show='')
 
-    def login(self):
+    def actualizar(self):
         name = self.input_name.get()
         password = self.input_password.get()
+        new_password = self.input_new_password.get()
         for x in self.usuarios_pred:
             if name == str(x.name):
                 if password == str(x.password):
-                    user_window.UserWindow(self.usuarios_pred)
+                    x.password = new_password
+                    CTkMessagebox(title='', message='Realizado Correctamente')
                     break
                 else:
                     CTkMessagebox(title='Advertencia', message='Contraseña Incorrecta')

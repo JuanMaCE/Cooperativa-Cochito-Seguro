@@ -1,15 +1,16 @@
 import random
+
+from CTkMessagebox import CTkMessagebox
+
 from data_estructure.list.list import List
 import customtkinter
 from users.user import User
 
-usuarios = List[User]()
-
-
 class UserRegistro:
-    def __init__(self):
+    def __init__(self, usuarios_pred):
         self.ventana = self.cargar_datos()
         self.frame = self.frame1(self.ventana)
+        self.usuarios_pred = usuarios_pred
         self.input_password = customtkinter.CTkEntry(master=self.frame, show='*', width=600)
         self.labels_parte1(self.frame)
         print(" ")
@@ -94,7 +95,9 @@ class UserRegistro:
         email = self.input_email.get()
         password = self.input_password.get()
         puesto = self.input_puesto.get()
-        codigo = random.randint(1000, 9999)
+        codigo = random.randint(10000, 99999)
 
         user = User(codigo, name, email, password, puesto)
-        usuarios.append(user)
+        self.usuarios_pred.append(user)
+
+        CTkMessagebox(title='', message='Realizado Correctamente')

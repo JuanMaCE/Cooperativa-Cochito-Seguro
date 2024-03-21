@@ -27,3 +27,24 @@ class Node(Generic[T]):
     @next.setter
     def next(self, new_next: Node[T]):
         self.__next = new_next
+
+    def devolver_id(self):
+        return str(self.__data.devolver_id())
+
+    def devolver_telefono(self):
+        return str(self.__data.devolver_telefono())
+
+    def devolver_dpi(self):
+        return str(self.__data.devolver_dpi())
+
+    def devolver_nit(self):
+        return str(self.__data.devolver_nit())
+
+    def referencias_personales(self):
+        return str(self.__data.referencias_personales())
+
+    def devolver_nomre(self):
+        return str(self.__data.devolver_nomre())
+
+    def devolver_direccion(self):
+        return str(self.__data.devolver_direccion())
