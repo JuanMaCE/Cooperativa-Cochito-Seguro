@@ -36,12 +36,12 @@ class Login:
     def labels_parte1(self, frame):
         lb_inbreso = customtkinter.CTkLabel(master=frame, text='Iniciar Sesión',
                                             font=("Times New Roman", 50, "bold"))
-        lb_inbreso.pack(pady=400, padx=400, )
+        lb_inbreso.pack(pady=400, padx=400)
         lb_inbreso.place(x=10, y=0)
 
         lb_email = customtkinter.CTkLabel(master=frame, text='Email:',
                                          font=("Times New Roman", 15, "bold"))
-        lb_email.pack(pady=400, padx=400, )
+        lb_email.pack(pady=400, padx=400)
         lb_email.place(x=10, y=60)
 
         self.input_email = customtkinter.CTkEntry(master=frame, placeholder_text="Email", width=600)
@@ -75,7 +75,8 @@ class Login:
         for x in self.usuarios_pred:
             if email == str(x.email):
                 if password == str(x.password):
-                    user_window.UserWindow(self.usuarios_pred)
+                    x.status = True
+                    user_window.UserWindow(self.usuarios_pred, x)
                     break
                 else:
                     CTkMessagebox(title='Advertencia', message='Contraseña Incorrecta')
