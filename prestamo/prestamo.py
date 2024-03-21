@@ -41,14 +41,14 @@ def solicitar():
     ingresos = float(input("Ingresos mensuales, LAYOUT: "))
     cuotas = int(input("Coutas solicitadas, LAYOUT: "))
     capacidad_de_pago = ingresos * 0.1 * cuotas
-    monto_solicitado_interes = ((monto_solicitado * ((cuotas//3) * 0.05)) + monto_solicitado)
+    monto_solicitado_interes = ((monto_solicitado * ((cuotas//3) * 0.01)) + monto_solicitado)
     if capacidad_de_pago >= monto_solicitado_interes:
-        monto_aprobado = monto_solicitado_interes
+        monto_aprobado = monto_solicitado
     else:
         monto_aprobado = capacidad_de_pago
     garantia = input("GARANTIA, LAYOUT: ")
     archivo = input("ARCHIVOS, LAYOUT: ")
-    plan_pagos = "Numero de Pagos: ", cuotas, "Pago minimo en cuota: ", str(float(monto_aprobado / cuotas))
+    plan_pagos = "Numero de Pagos: ", cuotas, "Pago minimo en cuota: ", str(int(monto_aprobado // cuotas)+1)
     historial_pagos = 0
     x = Prestamo(num_prestamo, 10001, "Generado",  monto_solicitado, cuotas, monto_aprobado, ingresos,
              garantia, archivo, plan_pagos, historial_pagos)
@@ -57,15 +57,25 @@ def solicitar():
 
 def generar_plan():
     ingresos = float(input("Ingresos mensuales, LAYOUT: "))
+    tiempo = float(input("Tiempo de pago en meses, LAYOUT: "))
     capacidad_pago = ingresos * 0.1
-    cuotas = int(input("Coutas solicitadas, LAYOUT: "))
+    cuotas = tiempo
     # actualizar(cuotas, capacidad_pago, ingresos):
-    monto_al_optar = cuotas * capacidad_pago - ((cuotas * capacidad_pago) * ((cuotas // 3) * 0.05))
-    print(monto_al_optar, "Boton en layout")
+    interes_pagar = (cuotas * capacidad_pago) * ((cuotas // 3) * 0.01)
+    monto_maximo = cuotas * capacidad_pago - ((cuotas * capacidad_pago) * ((cuotas // 3) * 0.01))
+    pago_realizar = monto_maximo / cuotas
+    print(monto_maximo, " maximo Boton en layout")
+    print(pago_realizar, "pagos Boton en layout")
+    print(interes_pagar, "interes a pagar text")
+    print(monto_maximo - interes_pagar, "solicitar")
+
+
+generar_plan()
+solicitar()
 
 
 def aprobar():
-    pass
+    codigo = float(input("Codigo, LAYOUT: "))
 
 
 def visualizar():
