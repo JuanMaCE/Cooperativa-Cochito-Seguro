@@ -57,7 +57,7 @@ class UserWindow:
         lb_status.place(x=700, y=0)
 
         if self.user_online.status:
-            lb_status.configure(text=self.user_online.name)
+            lb_status.configure(text=self.user_online.name + ' - En Línea')
 
         button_registro = customtkinter.CTkButton(master=frame, text="Registrar", fg_color=color, height=100, width=210,
                                                   command=self.open_registro)
