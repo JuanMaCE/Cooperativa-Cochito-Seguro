@@ -1,30 +1,20 @@
 import customtkinter
 from gestion_asociados import menu_gestion_asociados
 from users import user_login
-from users.user import User
 from data_estructure.list.list import List
 
-user_pred = List[User]()
 app = customtkinter.CTk()
-
-
-def usuarios_predeterminados():
-    user_pred.append(User(12345, 'Juan', 'juanmc228@gmail.com', 'Admin123', 'Administrador'))
-    user_pred.append(User(54321, 'Roger', 'rogcl228@gmail.com', 'Admin123', 'Administrador'))
-    user_pred.append(User(56789, 'Vyn', 'vynla228@gmail.com', 'Admin123', 'Administrador'))
-    user_pred.append(User(98765, 'Chat', 'chatman228@gmail.com', 'Admin123', 'Administrador'))
 
 
 def open_gestion():
     menu_gestion_asociados.main()
 
 
-def open_users():
-    usuarios_predeterminados()
+def open_users(user_pred):
     user_login.Login(user_pred)
 
 
-def main_window():
+def main_window(lista: List):
     customtkinter.set_appearance_mode("dark")
     customtkinter.set_default_color_theme("blue")
 
@@ -33,12 +23,13 @@ def main_window():
     app.wm_attributes("-topmost", False)
     frame = customtkinter.CTkFrame(master=app)
     frame.pack(pady=10, padx=10, fill='both', expand=True)
-    buttons(frame)
+    buttons(frame, lista)
+
     # botones
     app.mainloop()
 
 
-def buttons(frame):
+def buttons(frame, lista):
     button_gestion = customtkinter.CTkButton(master=frame, text='Gestión de Asociados', height=100, width=150,
                                          font=("Arial", 20), fg_color="#3E4446", command=lambda: open_gestion())
 
@@ -52,10 +43,9 @@ def buttons(frame):
     bt_prestamos_bancarios.place(x=50, y=150)
 
     bt_usuarios = customtkinter.CTkButton(master=frame, text='Usuarios', height=100, width=210,
-                                          font=("Arial", 20), fg_color="#3E4446", command=lambda: open_users())
+                                          font=("Arial", 20), fg_color="#3E4446", command=lambda: open_users(lista))
 
     bt_usuarios.pack(pady=10, padx=10)
     bt_usuarios.place(x=50, y=310)
 
 
-main_window()
