@@ -8,7 +8,7 @@ from gestion_asociados.datos_asociados.asociado import Asociado
 global asociado
 
 
-def main():
+def main(asociados):
     ventana = cargar_datos()
     frame = frame1(ventana)
     color = "#3E4446"
@@ -97,6 +97,7 @@ def main():
         referencias = ib_ref_personales.get()
         global asociado
         asociado = Asociado(name, adress, phone, dpi, nit, referencias)
+        asociados.append(asociado)
 
     # confirmación
     button_confirm_1 = customtkinter.CTkButton(master=frame, text="Confirmar", fg_color=color, width=180, height=45,
@@ -104,8 +105,12 @@ def main():
     button_confirm_1.pack(pady=100, padx=10)
     button_confirm_1.place(x=630, y=240)
     ventana.mainloop()
+    return
 
+
+def retornar_informacion():
     return asociado
+
 
 
 def cargar_datos():

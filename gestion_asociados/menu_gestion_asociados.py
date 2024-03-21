@@ -19,15 +19,12 @@ def main():
 
 
 def open_registro():
-    a = agregar.main()
-    asociados.prepend(a)
-    for dato in asociados:
-        print(dato)
+    agregar.main(asociados)
+
 
 def open_edit():
     for dato in asociados:
-        print(dato)
-        print(" jeje ")
+        print(dato.devolver_id(), " - ", dato.devolver_nomre())
     edit.main(asociados)
 
 

@@ -4,24 +4,18 @@ import random
 
 class Asociado:
     def __init__(self, nombre, direccion, telefono, dpi, nit, referencias_personales):
-        self.codigo_asociado = None
+        codigo = random.randint(999, 9999)
+        self.codigo_asociado = codigo
         self.nombre = nombre
         self.direccion = direccion
-        self.telefonos = ListD()
-        self.telefonos.append(telefono)
+        self.telefono = telefono
         self.dpi = dpi
         self.nit = nit
         self.archivos_adjuntos = ListD()
         self.referencias_personales = referencias_personales
-        self.generar_codigo()
 
-    def generar_codigo(self):
-        codigo = ""
-        codigo += self.nombre[0] + self.nombre[1]
-        for i in range(0,4):
-            num = random.randint(0,9)
-            codigo += str(num)
-        self.codigo_asociado = codigo
+    def cambiar_codigo(self, new_codigo: int):
+        self.codigo_asociado = new_codigo
 
     def agregar_referencais(self, referencias):
         self.referencias_personales = referencias
@@ -40,4 +34,26 @@ class Asociado:
         self.archivos_adjuntos = ListD()
         self.referencias_personales = referencias_personales
 
+    def devolver_nomre(self):
+        return str(self.nombre)
 
+    def __str__(self):
+        return str(self.nombre)
+
+    def devolver_id(self):
+        return str(self.codigo_asociado)
+
+    def devolver_direccion(self):
+        return str(self.direccion)
+
+    def devolver_telefono(self):
+        return str(self.telefono)
+
+    def devolver_dpi(self):
+        return str(self.dpi)
+
+    def devolver_nit(self):
+        return str(self.nit)
+
+    def referencias_personales(self):
+        return str(self.referencias_personales())

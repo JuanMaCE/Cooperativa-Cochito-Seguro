@@ -10,7 +10,7 @@ class CircularList(Generic[T]):
         self.__tail: Node[T] | None = None
         self.__size: int = 0
         self.__current: Node[T] | None = None
-        self.__contador = 0
+        self.__count: int = 0
 
     def __iter__(self):
         self.__current = self.__head
@@ -18,72 +18,79 @@ class CircularList(Generic[T]):
         return self
 
     def __next__(self):
-        tamanio = int(self.__size)
-        if tamanio == self.__contador:
-            self.__contador = 0
+        if self.__current is None:
             raise StopIteration
         data = self.__current.data
-        self.__current = self.__current.next
-        self.__contador += 1
+        if self.__current is self.__tail:
+            self.__current = None
+        else:
+            self.__current = self.__current.next
         return data
 
-    def imprimit_hacia_atras(self):
-        lista_al_reves = " "
-        tamanio = self.__size - 1
-        while True:
-            lista_al_reves += " - " + str(self.find_at(tamanio))
-            tamanio -= 1
-            if tamanio == 0:
-                lista_al_reves += " - " + str(self.find_at(tamanio))
-                break
-        return lista_al_reves
+    def get_size(self):
+        return self.__size
 
-    def inversrion_list(self):
-        new_head = self.__tail
-        new_tail = self.__head
-        self.__tail.next = None
-        tamanio = self.__size - 1
-        current = new_head
-        current.next = self.find_at(tamanio)
-        new_list = (CircularList[str]())
-        while True:
-            current.next = self.find_at(tamanio)
-            new_list.append(current.next)
-            tamanio -= 1
-            if tamanio == 0:
+    def is_empty(self) -> bool:
+        return self.__head is None and self.__tail is None
+
+    def find_at(self, index: int) -> Node[T]:
+        current = self.__head
+        for current_index in range(self.__size):
+            if current is None:
                 break
-        self.__head = new_head
-        self.__current = self.__head.next
-        for i in new_list:
-            self.__current = i
-            self.__current = self.__current.next
+            elif current_index == index:
+                return current
+            else:
+                current = current.next
+        raise IndexError("La posicion no existe")
 
     def append(self, data: T):
         new_node = Node(data)
         if self.is_empty():
-            new_node.next = new_node
             self.__head = new_node
             self.__tail = new_node
+            new_node.next = new_node
+            new_node.previous = new_node
         else:
             self.__tail.next = new_node
+            self.__head.previous = new_node
+            new_node.previous = self.__tail
             self.__tail = new_node
-        self.__tail.next = self.__head
+            new_node.next = self.__head
         self.__size += 1
 
     def prepend(self, data: T):
         new_node = Node(data)
         if self.is_empty():
             new_node.next = new_node
+            new_node.previous = new_node
             self.__head = new_node
             self.__tail = new_node
         else:
+            new_node.previous = self.__tail
             new_node.next = self.__head
+            self.__head.previous = new_node
+            self.__tail.next = new_node
             self.__head = new_node
-            self.__tail.next = self.__head
+
         self.__size += 1
 
-    def is_empty(self) -> bool:
-        return self.__head is None and self.__tail is None
+    def insert_at(self, data: T, index):
+        new_node = Node(data)
+        if self.is_empty():
+            raise IndexError("Lista vacia")
+        elif index == 0:
+            self.prepend(new_node)
+        elif index == self.__size:
+            self.append(new_node)
+        else:
+            aux_node = self.find_at(index)
+            prev_node = aux_node.previous
+            prev_node.next = new_node
+            new_node.previous = prev_node
+            new_node.next = aux_node
+            aux_node.previous = new_node
+            self.__size += 1
 
     def shift(self) -> T:
         if self.is_empty():
@@ -98,7 +105,9 @@ class CircularList(Generic[T]):
         else:
             current = self.__head
             self.__head = current.next
+            self.__head.prev = self.__tail
             current.next = None
+            current.previous = None
             self.__tail.next = self.__head
             self.__size -= 1
             return current.data
@@ -115,7 +124,7 @@ class CircularList(Generic[T]):
             return current.data
         else:
             current = self.__tail
-            previous = self.find_at(self.__size - 2)
+            previous = current.previous
             self.__tail = previous
             self.__tail.next = self.__head
             current.next = None
@@ -123,36 +132,35 @@ class CircularList(Generic[T]):
 
             return current.data
 
-    def find_at(self, index: int) -> Node[T]:
-        current = self.__head
-        for current_index in range(self.__size):
-            if current is None:
-                break
-            elif current_index == index:
-                return current
-            else:
-                current = current.next
-        raise IndexError("La posicion no existe")
+    def delete_at(self, index):
+        if self.is_empty() or index >= self.__size:
+            raise IndexError("Index inválido")
+        elif index == 0:
+            data = self.shift()
+            return data
+        elif index == self.__size - 1:
+            data = self.pop()
+            return data
+        elif self.__tail is self.__head:
+            node = self.find_at(index)
+            node.next = None
+            node.previous = None
+            self.__head = None
+            self.__size = None
+            self.__size = 0
 
-    def find_index(self, data: T):
-        contador = 0
-        for value in self:
-            if value == data:
-                print(" se encontro en: ", contador)
-                return contador
-            contador += 1
-
-    def insert_at(self, data: int, index: int):
-        if index == 0:
-            self.prepend(data)
-        if index == self.__size:
-            self.append(data)
-        elif 0 < index <= self.__size:
-            new_node = Node(data)
-            previus = self.find_at(index - 1)
-            new_node.next = previus.next
-            previus.next = new_node
-            self.__size += 1
+            return node.data
         else:
-            raise Exception(" la posición no existe")
+            node = self.find_at(index)
+            prev_node = node.previous
+            next_node = node.next
+            prev_node.next = next_node
+            next_node.previous = prev_node
+            node.previous = None
+            node.next = None
+            self.__size -= 1
+
+            return node.data
+
+
 
