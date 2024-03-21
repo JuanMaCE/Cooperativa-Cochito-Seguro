@@ -19,22 +19,26 @@ def main(lista):
     def buscar():
         id_a_buscar = ib_id.get()
         contador = 0
+        existe = False
         for dato in lista:
             if id_a_buscar == dato.devolver_id():
                 global asociado_a_cambiar
                 asociado_a_cambiar = dato
                 posicion_a_editar = contador
+                existe = True
                 break
             contador += 1
+        if existe:
+            def eliminar():
+                eliminado = lista.delete_at(posicion_a_editar)
+                CTkMessagebox(title='APROBADO', message='SE ELIMINO CORRECTAMENTE A ' + str(eliminado))
 
-        def eliminar():
-            eliminado = lista.delete_at(posicion_a_editar)
-            CTkMessagebox(title='APROBADO', message='SE ELIMINO CORRECTAMENTE A ' + str(eliminado))
-
-        button_deleate = customtkinter.CTkButton(master=frame_1, text="Eliminar", fg_color=color, width=180, height=45,
-                                                 command=eliminar)
-        button_deleate.pack(pady=100, padx=10)
-        button_deleate.place(x=10, y=150)
+            button_deleate = customtkinter.CTkButton(master=frame_1, text="Eliminar", fg_color=color, width=180, height=45,
+                                                     command=eliminar)
+            button_deleate.pack(pady=100, padx=10)
+            button_deleate.place(x=10, y=150)
+        else:
+            CTkMessagebox(title='INEXISTENTE', message='No se encontro el ID')
 
     button_busqueda = customtkinter.CTkButton(master=frame_1, text="Buscar", fg_color=color, width=180, height=45
                                               , command=buscar)

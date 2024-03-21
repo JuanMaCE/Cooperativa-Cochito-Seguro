@@ -56,4 +56,4 @@ class Asociado:
         return str(self.nit)
 
     def referencias_personales(self):
-        return str(self.referencias_personales())
+        return str(self.referencias_personales)

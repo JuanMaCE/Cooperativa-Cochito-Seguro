@@ -9,6 +9,7 @@ from CTkMessagebox import CTkMessagebox
 global texto_imagen
 from data_estructure.circular_list.circular_list import CircularList
 from gestion_asociados.datos_asociados.asociado import Asociado
+
 global asociado_a_cambiar
 
 
@@ -29,79 +30,86 @@ def main(lista: CircularList):
     def buscar():
         id_a_buscar = ib_id.get()
         contador = 0
+        existe = False
         for dato in lista:
             if id_a_buscar == dato.devolver_id():
                 global asociado_a_cambiar
                 asociado_a_cambiar = dato
                 posicion_a_editar = contador
+                existe = True
                 CTkMessagebox(title='APROBADO', message='SE ENCONTRO CORRECTAMENTE A ' + str(asociado_a_cambiar))
                 break
             contador += 1
-        ib_name = customtkinter.CTkEntry(master=frame, placeholder_text=str(asociado_a_cambiar.devolver_nomre()),
-                                         width=400,
-                                         height=35)
-        ib_name.pack(pady=100, padx=10)
-        ib_name.place(x=130, y=23)
-        ib_direccion = customtkinter.CTkEntry(master=frame,
-                                              placeholder_text=str(asociado_a_cambiar.devolver_direccion()),
-                                              width=580,
-                                              height=35)
-        ib_direccion.pack(pady=100, padx=10)
-        ib_direccion.place(x=230, y=66)
+        if existe == True:
+            ib_name = customtkinter.CTkEntry(master=frame, placeholder_text=str(asociado_a_cambiar.devolver_nomre()),
+                                             width=400,
+                                             height=35)
+            ib_name.pack(pady=100, padx=10)
+            ib_name.place(x=130, y=23)
+            ib_direccion = customtkinter.CTkEntry(master=frame,
+                                                  placeholder_text=str(asociado_a_cambiar.devolver_direccion()),
+                                                  width=580,
+                                                  height=35)
+            ib_direccion.pack(pady=100, padx=10)
+            ib_direccion.place(x=230, y=66)
 
-        ib_tel = customtkinter.CTkEntry(master=frame, placeholder_text=str(asociado_a_cambiar.devolver_telefono()))
-        ib_tel.pack(pady=100, padx=10)
-        ib_tel.place(x=75, y=113)
+            ib_tel = customtkinter.CTkEntry(master=frame, placeholder_text=str(asociado_a_cambiar.devolver_telefono()))
+            ib_tel.pack(pady=100, padx=10)
+            ib_tel.place(x=75, y=113)
 
-        ib_num_dpi = customtkinter.CTkEntry(master=frame, placeholder_text=str(asociado_a_cambiar.devolver_dpi()),
-                                            width=180, height=35)
-        ib_num_dpi.pack(pady=100, padx=10)
-        ib_num_dpi.place(x=300, y=113)
+            ib_num_dpi = customtkinter.CTkEntry(master=frame, placeholder_text=str(asociado_a_cambiar.devolver_dpi()),
+                                                width=180, height=35)
+            ib_num_dpi.pack(pady=100, padx=10)
+            ib_num_dpi.place(x=300, y=113)
 
-        ib_nit = customtkinter.CTkEntry(master=frame, placeholder_text=str(asociado_a_cambiar.devolver_nit()),
-                                        width=180,
-                                        height=35)
-        ib_nit.pack(pady=100, padx=10)
-        ib_nit.place(x=580, y=110)
+            ib_nit = customtkinter.CTkEntry(master=frame, placeholder_text=str(asociado_a_cambiar.devolver_nit()),
+                                            width=180,
+                                            height=35)
+            ib_nit.pack(pady=100, padx=10)
+            ib_nit.place(x=580, y=110)
 
-        ib_ref_personales = customtkinter.CTkEntry(master=frame,
-                                                   placeholder_text="str(asociado_a_cambiar.referencias_personales())",
-                                                   width=400)
-        ib_ref_personales.pack(pady=100, padx=10)
-        ib_ref_personales.place(x=210, y=210)
+            ib_ref_personales = customtkinter.CTkEntry(master=frame,
+                                                       placeholder_text="",
+                                                       width=400)
+            ib_ref_personales.pack(pady=100, padx=10)
+            ib_ref_personales.place(x=210, y=210)
 
-        cb_busqueda = customtkinter.CTkComboBox(master=frame, font=("Times New Roman", 20),
-                                                values=['Recibo De Luz', 'Telefono', 'Estados de cuenta'], width=200)
-        cb_busqueda.pack(pady=400, padx=400, )
-        cb_busqueda.place(x=150, y=160)
+            cb_busqueda = customtkinter.CTkComboBox(master=frame, font=("Times New Roman", 20),
+                                                    values=['Recibo De Luz', 'Telefono', 'Estados de cuenta'],
+                                                    width=200)
+            cb_busqueda.pack(pady=400, padx=400, )
+            cb_busqueda.place(x=150, y=160)
 
-        def seleccionar_imagen():
-            get_image = filedialog.askopenfilenames(title="SELECT IMAGE",
-                                                    filetypes=(("png", "*.png"), ("jpg", "*.jpg"), ("Allfile", "*.*")))
-            texto = str(get_image)
-            texto_final = ""
-            for i in range(2, len(texto) - 3):
-                texto_final += texto[i]
-            print(texto_final)
-            ruta_imagen_origen = str(texto_final)
-            ruta_carpeta_destino = 'imagenes'
-            if not os.path.exists(ruta_carpeta_destino):
-                os.makedirs(ruta_carpeta_destino)
+            def seleccionar_imagen():
+                get_image = filedialog.askopenfilenames(title="SELECT IMAGE",
+                                                        filetypes=(
+                                                        ("png", "*.png"), ("jpg", "*.jpg"), ("Allfile", "*.*")))
+                texto = str(get_image)
+                texto_final = ""
+                for i in range(2, len(texto) - 3):
+                    texto_final += texto[i]
+                print(texto_final)
+                ruta_imagen_origen = str(texto_final)
+                ruta_carpeta_destino = 'imagenes'
+                if not os.path.exists(ruta_carpeta_destino):
+                    os.makedirs(ruta_carpeta_destino)
 
-            shutil.copy(ruta_imagen_origen, ruta_carpeta_destino)
-            texto_alrevez = ""
-            for i in range(len(texto_final)):
-                texto_alrevez += texto_final[-i - 1]
-            texto_final_alrevez = ""
-            for i in range(len(texto_alrevez)):
-                if texto_alrevez[i] == "/":
-                    break
-                texto_final_alrevez += texto_alrevez[i]
-            texto_image = ""
-            for i in range(len(texto_final_alrevez)):
-                texto_image += texto_final_alrevez[-i - 1]
-            global texto_imagen
-            texto_imagen = texto_image
+                shutil.copy(ruta_imagen_origen, ruta_carpeta_destino)
+                texto_alrevez = ""
+                for i in range(len(texto_final)):
+                    texto_alrevez += texto_final[-i - 1]
+                texto_final_alrevez = ""
+                for i in range(len(texto_alrevez)):
+                    if texto_alrevez[i] == "/":
+                        break
+                    texto_final_alrevez += texto_alrevez[i]
+                texto_image = ""
+                for i in range(len(texto_final_alrevez)):
+                    texto_image += texto_final_alrevez[-i - 1]
+                global texto_imagen
+                texto_imagen = texto_image
+        else:
+            CTkMessagebox(title='NO EXISTE ', message='NO SE ENCONTRO EL ID')
 
         # botones
 
@@ -119,7 +127,6 @@ def main(lista: CircularList):
             nit = ib_nit.get()
             referencias = ib_ref_personales.get()
             asociado = Asociado(name, adress, phone, dpi, nit, referencias)
-            print("se elimino:  ", lista.delete_at(posicion_a_editar))
             asociado.cambiar_codigo(ib_id.get())
             lista.insert_at(asociado, posicion_a_editar)
             CTkMessagebox(title='APROBADO', message='SE CORRIGIO CORRECTAMENTE A ' + str(asociado_a_cambiar))
@@ -164,7 +171,6 @@ def frame_2(ventana):
 
 
 def labels_parte1(frame, frame2):
-
     lb_inbreso = customtkinter.CTkLabel(master=frame2, text='Edicion asociados',
                                         font=("Times New Roman", 50, "bold"))
     lb_inbreso.pack(pady=400, padx=400)
