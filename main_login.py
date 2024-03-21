@@ -17,7 +17,7 @@ def usuarios_predeterminados():
     user_pred.append(User(54321, 'Roger', 'rogcl228@gmail.com', 'Admin123', 'Administrador'))
     user_pred.append(User(56789, 'Vyn', 'vynla228@gmail.com', 'Admin123', 'Administrador'))
     user_pred.append(User(98765, 'Chat', 'chatman228@gmail.com', 'Admin123', 'Administrador'))
-    user_pred.append(User(98765, 'admin', 'chatman228@gmail.com', '1234', 'Administrador'))
+    user_pred.append(User(98765, 'admin', 'admin', '1234', 'Administrador'))
 
     # CARGAR ASOCIADOS
 
@@ -76,7 +76,7 @@ class Login:
         lb_name.pack(pady=400, padx=400, )
         lb_name.place(x=10, y=60)
 
-        self.input_name = customtkinter.CTkEntry(master=frame, placeholder_text="Nombre Completo", width=600)
+        self.input_name = customtkinter.CTkEntry(master=frame, placeholder_text="Nombre Completo", width=620)
         self.input_name.pack(padx=40, pady=40)
         self.input_name.place(x=80, y=60)
 
