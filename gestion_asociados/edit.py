@@ -60,7 +60,7 @@ def main(lista: CircularList):
         ib_nit.place(x=580, y=110)
 
         ib_ref_personales = customtkinter.CTkEntry(master=frame,
-                                                   placeholder_text=str(asociado_a_cambiar.referencias_personales),
+                                                   placeholder_text=str(asociado_a_cambiar.referencias_personales()),
                                                    width=400)
         ib_ref_personales.pack(pady=100, padx=10)
         ib_ref_personales.place(x=210, y=210)
