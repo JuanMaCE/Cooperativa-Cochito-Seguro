@@ -1,5 +1,6 @@
 import customtkinter
 from gestion_asociados import menu_gestion_asociados
+from gestion_prestamo import menu_prestamos
 from users import user_login
 from users.user import User
 from data_estructure.list.list import List
@@ -18,6 +19,8 @@ def usuarios_predeterminados():
 def open_gestion():
     menu_gestion_asociados.main()
 
+def open_prestamos():
+    menu_prestamos.main()
 
 def open_users():
     usuarios_predeterminados()
@@ -46,7 +49,7 @@ def buttons(frame):
     button_gestion.place(x=50, y=10)
 
     bt_prestamos_bancarios = customtkinter.CTkButton(master=frame, text='Prestamos bancarios', height=100, width=160,
-                                                     font=("Arial", 20), fg_color="#3E4446")
+                                                     font=("Arial", 20), fg_color="#3E4446", command=lambda: open_prestamos())
 
     bt_prestamos_bancarios.pack(pady=10, padx=10)
     bt_prestamos_bancarios.place(x=50, y=150)
