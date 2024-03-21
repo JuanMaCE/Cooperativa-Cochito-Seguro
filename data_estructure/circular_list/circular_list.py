@@ -1,4 +1,4 @@
-from node_circular import Node
+from data_estructure.circular_list.node_circular import Node
 from typing import TypeVar, Generic
 
 T = TypeVar('T')
@@ -10,7 +10,7 @@ class CircularList(Generic[T]):
         self.__tail: Node[T] | None = None
         self.__size: int = 0
         self.__current: Node[T] | None = None
-        self.__count: int = 0
+        self.__contador = 0
 
     def __iter__(self):
         self.__current = self.__head
@@ -18,12 +18,13 @@ class CircularList(Generic[T]):
         return self
 
     def __next__(self):
-        data = self.__current
-        if self.__current is self.__tail.next and self.__count == 1:
-            self.__count = 0
+        tamanio = int(self.__size)
+        if tamanio == self.__contador:
+            self.__contador = 0
             raise StopIteration
+        data = self.__current.data
         self.__current = self.__current.next
-        self.__count = 1
+        self.__contador += 1
         return data
 
     def imprimit_hacia_atras(self):

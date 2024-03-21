@@ -1,4 +1,4 @@
-from node import Node
+from data_estructure.list_double.node import Node
 from typing import TypeVar, Generic
 
 

@@ -4,9 +4,10 @@ from tkinter import filedialog
 import shutil
 import os
 global texto_imagen
+from data_estructure.circular_list.circular_list import CircularList
 
 
-def main():
+def main(lista: CircularList):
     ventana = cargar_datos()
     frame2 = frame1(ventana)
     frame = frame_2(ventana)
@@ -17,6 +18,18 @@ def main():
     ib_id = customtkinter.CTkEntry(master=frame2, placeholder_text='Ingrese Codigo')
     ib_id.pack(pady=12, padx=10)
     ib_id.place(x=330, y=65)
+
+    # buscar entre la lista
+    def buscar():
+        for dato in lista:
+            print(dato)
+        print("Hola")
+
+    button_busqueda = customtkinter.CTkButton(master=frame2, text="Buscar", fg_color=color, width=180, height=45,
+                                              command=buscar)
+    button_busqueda.pack(pady=100, padx=10)
+    button_busqueda.place(x=10, y=100)
+
 
     ib_name = customtkinter.CTkEntry(master=frame, placeholder_text='Ingrese Nombre del producto', width=400,
                                      height=35)
@@ -84,10 +97,6 @@ def main():
                                                 command=seleccionar_imagen)
     button_select_img.pack(pady=100, padx=10)
     button_select_img.place(x=630, y=167)
-
-    button_busqueda = customtkinter.CTkButton(master=frame2, text="Buscar", fg_color=color, width=180, height=45)
-    button_busqueda.pack(pady=100, padx=10)
-    button_busqueda.place(x=10, y=100)
 
     # confirmación
     button_confirm_2 = customtkinter.CTkButton(master=frame, text="Confirmar", fg_color=color, width=180, height=45)

@@ -1,7 +1,10 @@
 import customtkinter
 from gestion_asociados import agregar, edit, delete
+from data_estructure.circular_list.circular_list import CircularList
+from typing import TypeVar
 
-
+T = TypeVar("T")
+asociados = CircularList[T]()
 color = "#3E4446"
 
 
@@ -17,12 +20,15 @@ def main():
 
 def open_registro():
     a = agregar.main()
-    for i in range(len(a)):
-        print(i)
-
+    asociados.prepend(a)
+    for dato in asociados:
+        print(dato)
 
 def open_edit():
-    edit.main()
+    for dato in asociados:
+        print(dato)
+        print(" jeje ")
+    edit.main(asociados)
 
 
 def open_delete():
